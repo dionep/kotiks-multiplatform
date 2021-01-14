@@ -11,11 +11,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(AndroidConfig.compileSdkVersion)
     defaultConfig {
-        applicationId = "com.dionep.kotiksmultiplatform.androidApp"
-        minSdkVersion(24)
-        targetSdkVersion(29)
+        applicationId = AndroidConfig.applicationId
+        minSdkVersion(AndroidConfig.minSdkVersion)
+        targetSdkVersion(AndroidConfig.targetSdkVersion)
         versionCode = 1
         versionName = "1.0"
     }

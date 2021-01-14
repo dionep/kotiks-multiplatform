@@ -6,7 +6,13 @@ plugins {
 }
 
 kotlin {
-    android()
+    android {
+        configurations {
+            create("testApi")
+            create("testDebugApi")
+            create("testReleaseApi")
+        }
+    }
     ios {
         binaries {
             framework {
@@ -24,7 +30,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("com.google.android.material:material:1.2.1")
+                implementation(Dependencies.Android.Material)
             }
         }
         val androidTest by getting {
@@ -43,7 +49,7 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdkVersion(24)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
     }
 }
 
