@@ -5,7 +5,25 @@ plugins {
     id("com.android.library")
 }
 
+repositories {
+    gradlePluginPortal()
+    google()
+    jcenter()
+    mavenCentral()
+    maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
+    maven(url = "https://dl.bintray.com/badoo/maven")
+}
+
 kotlin {
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class).all {
+        JavaVersion.VERSION_1_8.toString().also {
+            kotlinOptions.jvmTarget = it
+            if (plugins.hasPlugin("org.jetbrains.kotlin.jvm")) {
+                sourceCompatibility = it
+                targetCompatibility = it
+            }
+        }
+    }
     android {
         configurations {
             create("testApi")
@@ -21,16 +39,21 @@ kotlin {
         }
     }
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
+        val commonMain by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(Dependencies.Common.Reaktive.Core)
+                implementation(Dependencies.Common.Reaktive.Utils)
+                implementation(Dependencies.Common.Reaktive.CoroutinesInterop)
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation(Dependencies.Android.Material)
+                implementation(Dependencies.Android.AndroidX.AppCompat)
+                implementation(Dependencies.Android.AndroidX.CoreKtx)
+            }
+        }
+        val iosMain by getting {
+            dependencies {
             }
         }
         val androidTest by getting {
@@ -39,17 +62,16 @@ kotlin {
                 implementation("junit:junit:4.13")
             }
         }
-        val iosMain by getting
         val iosTest by getting
     }
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(AndroidConfig.compileSdkVersion)
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdkVersion(AndroidConfig.minSdkVersion)
+        targetSdkVersion(AndroidConfig.targetSdkVersion)
     }
 }
 
