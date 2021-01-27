@@ -9,7 +9,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":shared:mvi"))
+                api(project(Modules.Shared.Mvi.toString()))
+                implementation(project(Modules.Shared.Model.toString()))
                 implementation(Dependencies.Badoo.Reaktive.Utils)
                 implementation(Dependencies.Badoo.Reaktive.Reaktive)
                 implementation(Dependencies.Jetbrains.Kotlinx.Serialization.RuntimeCommon)
