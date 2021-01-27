@@ -74,7 +74,7 @@ fun Project.setupAndroidSdkVersions() {
 }
 
 // Workaround since iosX64() and iosArm64() function are not resolved if used in a module with Kotlin 1.3.70
-fun Project.setupKittensBinaries() {
+fun Project.setupCatsBinaries() {
     fun KotlinNativeTarget.setupIosBinaries() {
         binaries {
             framework {

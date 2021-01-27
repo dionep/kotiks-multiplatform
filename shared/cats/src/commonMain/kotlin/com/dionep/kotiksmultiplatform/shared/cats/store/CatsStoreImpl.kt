@@ -1,13 +1,13 @@
 package com.dionep.kotiksmultiplatform.shared.cats.store
 
 import com.badoo.reaktive.disposable.scope.DisposableScope
-import com.badoo.reaktive.maybe.*
-import com.badoo.reaktive.observable.ObservableObserver
-import com.badoo.reaktive.observable.defaultIfEmpty
-import com.badoo.reaktive.observable.startWithValue
+import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.*
-import kotlin.contracts.Effect
+import com.badoo.reaktive.single.*
+import com.badoo.reaktive.single.map
+import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.Intent
+import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.State
+import model.Fact
 
 internal class CatsStoreImpl(
     private val network: Network,
@@ -26,6 +26,9 @@ internal class CatsStoreImpl(
     private fun load(network: Network, parser: Parser) =
         network.load()
             .flatMap(parser::parse)
+            .flatMapIterable { it }
+            .map { it.text }
+            .toList()
             .map(Effect::SuccessLoaded)
             .observeOn(mainScheduler)
             .asObservable()
@@ -40,11 +43,11 @@ internal class CatsStoreImpl(
         }
 
     interface Network {
-        fun load(): Maybe<String>
+        fun load(): Single<String>
     }
 
     interface Parser {
-        fun parse(json: String): Maybe<List<String>>
+        fun parse(json: String): Single<List<Fact>>
     }
 
     private sealed class Effect {

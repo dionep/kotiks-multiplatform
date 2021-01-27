@@ -3,7 +3,7 @@ plugins {
 }
 
 setupMultiplatform()
-setupKittensBinaries()
+setupCatsBinaries()
 
 kotlin {
     sourceSets {
@@ -14,6 +14,7 @@ kotlin {
                 implementation(Dependencies.Badoo.Reaktive.Utils)
                 implementation(Dependencies.Badoo.Reaktive.Reaktive)
                 implementation(Dependencies.Jetbrains.Kotlinx.Serialization.RuntimeCommon)
+                implementation(Dependencies.Jetbrains.Kotlin.Plugin.Serialization)
             }
         }
 
