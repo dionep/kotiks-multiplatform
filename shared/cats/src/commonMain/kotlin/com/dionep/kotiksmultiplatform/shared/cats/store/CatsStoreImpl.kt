@@ -4,7 +4,6 @@ import com.badoo.reaktive.disposable.scope.DisposableScope
 import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
-import com.badoo.reaktive.single.map
 import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.Intent
 import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.State
 import model.Fact
@@ -38,8 +37,8 @@ internal class CatsStoreImpl(
     private fun reduce(state: State, effect: Effect): State =
         when(effect) {
             is Effect.StartLoading -> state.copy(isLoading = true)
-            is Effect.SuccessLoaded -> state.copy(isLoading = false, catsList = State.Data.CatNames(effect.imageUrls))
-            is Effect.Failure -> state.copy(isLoading = false, catsList = State.Data.Error)
+            is Effect.SuccessLoaded -> state.copy(isLoading = false, data = State.Data.CatFacts(effect.imageUrls))
+            is Effect.Failure -> state.copy(isLoading = false, data = State.Data.Error)
         }
 
     interface Network {

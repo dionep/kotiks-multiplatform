@@ -8,7 +8,7 @@ interface CatsView: MviView<Model, Event> {
     data class Model(
         val isLoading: Boolean,
         val isError: Boolean,
-        val catsNames: List<String>
+        val catsFacts: List<String>
     )
 
     sealed class Event {

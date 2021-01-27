@@ -6,16 +6,16 @@ import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.*
 internal interface CatsStore : Store<Intent, State> {
 
     sealed class Intent {
-        object Reload : Intent()
+        object Load : Intent()
     }
 
     data class State(
         val isLoading: Boolean = false,
-        val catsList: Data = Data.CatNames()
+        val data: Data = Data.CatFacts()
     ) {
 
         sealed class Data {
-            data class CatNames(val names: List<String> = emptyList()) : Data()
+            data class CatFacts(val facts: List<String> = emptyList()) : Data()
             object Error : Data()
         }
 
