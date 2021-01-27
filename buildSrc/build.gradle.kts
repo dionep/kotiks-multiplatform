@@ -3,15 +3,18 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
     google()
     jcenter()
 }
 
 dependencies {
-    implementation(gradleApi())
-    implementation(localGroovy())
+    implementation(Dependencies.Jetbrains.Kotlin.Plugin.Gradle)
+    implementation(Dependencies.Jetbrains.Kotlin.Plugin.Serialization)
+    implementation(Dependencies.Android.Tools.Build.Gradle)
+//    implementation(Dependencies.TouchLab.KotlinXcodeSync)
+}
 
-    implementation("com.android.tools.build:gradle:7.0.0-alpha04")
-    implementation(kotlin("gradle-plugin", "1.4.10"))
+kotlin {
+    // Add Deps to compilation, so it will become available in main project
+    sourceSets.getByName("main").kotlin.srcDir("buildSrc/src/main/kotlin")
 }

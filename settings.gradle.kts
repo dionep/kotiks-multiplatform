@@ -1,15 +1,6 @@
-pluginManagement {
-    repositories {
-        google()
-        jcenter()
-        gradlePluginPortal()
-        mavenCentral()
-    }
-    
-}
-rootProject.name = "KotiksMultiplatform"
+enableFeaturePreview("GRADLE_METADATA")
 
-
+include(":shared:mvi")
+include(":shared:cats")
 include(":androidApp")
-include(":shared")
-
+include(":shared:model")
