@@ -39,7 +39,7 @@ object Dependencies {
 
         object Kotlinx : Group(name = "org.jetbrains.kotlinx") {
             object Serialization {
-                private const val version = "0.20.0"
+                private const val version = "1.0.1"
 
                 object RuntimeCommon : Dependency(group = Kotlinx, name = "kotlinx-serialization-runtime-common", version = version)
                 object Runtime : Dependency(group = Kotlinx, name = "kotlinx-serialization-runtime", version = version)
@@ -95,7 +95,7 @@ object Dependencies {
 
     object Badoo {
         object Reaktive : Group(name = "com.badoo.reaktive") {
-            private const val version = "1.1.16"
+            private const val version = "1.1.17"
 
             object Reaktive :
                 Dependency(group = Badoo.Reaktive, name = "reaktive", version = version)

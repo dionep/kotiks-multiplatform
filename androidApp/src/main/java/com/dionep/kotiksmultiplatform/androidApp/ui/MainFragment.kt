@@ -4,24 +4,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.dionep.kotiksmultiplatform.androidApp.R
-import com.dionep.kotiksmultiplatform.shared.BaseFragment
-import com.dionep.kotiksmultiplatform.shared.features.mainFeature
 
-class MainFragment : BaseFragment() {
-
-    override val layoutRes: Int
-        get() = R.layout.fragment_main
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mainFeature(
-            stateListener = {
-                Log.d("rereState", it.toString())
-            },
-            newsListener = {
-                Log.d("rereNews", it.toString())
-            }
-        )
-    }
-
-}
+//class MainFragment : BaseFragment() {
+//
+//    override val layoutRes: Int
+//        get() = R.layout.fragment_main
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        mainFeature(
+//            stateListener = {
+//                Log.d("rereState", it.toString())
+//            },
+//            newsListener = {
+//                Log.d("rereNews", it.toString())
+//            }
+//        )
+//    }
+//
+//}

@@ -1,4 +1,5 @@
 import com.android.build.gradle.BaseExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
@@ -78,7 +79,7 @@ fun Project.setupCatsBinaries() {
     fun KotlinNativeTarget.setupIosBinaries() {
         binaries {
             framework {
-                baseName = "Cats"
+                baseName = "shared"
                 freeCompilerArgs = freeCompilerArgs.plus("-Xobjc-generics").toMutableList()
 
                 export(project(":shared:mvi"))
@@ -99,6 +100,8 @@ fun Project.android(block: BaseExtension.() -> Unit) {
 fun Project.kotlin(block: KotlinMultiplatformExtension.() -> Unit) {
     extensions.getByType<KotlinMultiplatformExtension>().block()
 }
+
+fun Project.getTargets() = extensions.getByType<KotlinMultiplatformExtension>().targets
 
 typealias SourceSets = NamedDomainObjectContainer<KotlinSourceSet>
 

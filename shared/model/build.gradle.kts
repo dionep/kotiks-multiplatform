@@ -8,8 +8,8 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(Dependencies.Jetbrains.Kotlin.Plugin.Serialization)
-                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.RuntimeCommon)
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
             }
         }
     }
