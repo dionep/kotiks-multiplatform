@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 fun Project.setupMultiplatform() {
     plugins.apply("com.android.library")
     plugins.apply("kotlin-multiplatform")
-
     setupAndroidSdkVersions()
 
     kotlin {
