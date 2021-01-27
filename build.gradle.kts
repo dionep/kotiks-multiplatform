@@ -1,14 +1,5 @@
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        jcenter()
-        google()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(Dependencies.Common.GradlePlugin)
-        classpath(Dependencies.Common.KotlinGradlePlugin)
-    }
+plugins {
+    `kotlin-dsl`
 }
 
 allprojects {
@@ -17,8 +8,4 @@ allprojects {
         jcenter()
         mavenCentral()
     }
-}
-
-repositories {
-    mavenCentral()
 }

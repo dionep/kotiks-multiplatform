@@ -3,18 +3,19 @@ plugins {
     kotlin("android")
 }
 
+setupAndroidSdkVersions()
+
 android {
-    compileSdkVersion(AndroidConfig.compileSdkVersion)
     defaultConfig {
-        applicationId = AndroidConfig.applicationId
-        minSdkVersion(AndroidConfig.minSdkVersion)
-        targetSdkVersion(AndroidConfig.targetSdkVersion)
+        applicationId = "com.dionep.kotliksmultiplatform.androidApp"
         versionCode = 1
         versionName = "1.0"
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
 
@@ -29,21 +30,15 @@ android {
         }
     }
 
-    android.buildFeatures.viewBinding = true
-}
-
-repositories {
-    gradlePluginPortal()
-    google()
-    jcenter()
-    mavenCentral()
-    maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
-    maven(url = "https://dl.bintray.com/badoo/maven")
 }
 
 dependencies {
-    implementation(project(":shared"))
-    implementation(Dependencies.Android.Material)
-    implementation(Dependencies.Android.AndroidX.AppCompat)
-    implementation("androidx.constraintlayout:constraintlayout:2.0.2")
+    implementation(Dependencies.Jetbrains.Kotlin.StdLib.Jdk7)
+    implementation(Dependencies.AndroidX.AppCompat.AppCompat)
+    implementation(Dependencies.AndroidX.RecyclerView.RecyclerView)
+    implementation(Dependencies.AndroidX.ConstraintLayout.ConstraintLayout)
+    implementation(Dependencies.AndroidX.SwypeRefreshLayout.SwypeRefreshLayout)
+    implementation(Dependencies.AndroidX.Core.Ktx)
+    implementation(Dependencies.Google.Android.Material.Material)
+    implementation(Dependencies.Squareup.Picasso.Picasso)
 }
