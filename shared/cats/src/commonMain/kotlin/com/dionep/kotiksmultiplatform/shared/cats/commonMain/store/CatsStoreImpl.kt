@@ -1,11 +1,11 @@
-package com.dionep.kotiksmultiplatform.shared.cats.store
+package com.dionep.kotiksmultiplatform.shared.cats.commonMain.store
 
 import com.badoo.reaktive.disposable.scope.DisposableScope
 import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.Intent
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.State
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStore.Intent
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStore.State
 import model.Fact
 
 internal class CatsStoreImpl(

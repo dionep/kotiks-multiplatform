@@ -1,10 +1,10 @@
-package com.dionep.kotiksmultiplatform.shared.cats.integration
+package com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration
 
 import com.badoo.reaktive.scheduler.computationScheduler
 import com.badoo.reaktive.single.Single
 import com.badoo.reaktive.single.singleFromFunction
 import com.badoo.reaktive.single.subscribeOn
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStoreImpl
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStoreImpl
 import com.dionep.kotiksmultiplatform.shared.model.Fact
 import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.json.Json

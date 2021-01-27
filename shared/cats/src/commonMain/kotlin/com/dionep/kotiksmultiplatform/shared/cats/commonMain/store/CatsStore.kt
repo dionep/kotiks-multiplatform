@@ -1,7 +1,7 @@
-package com.dionep.kotiksmultiplatform.shared.cats.store
+package com.dionep.kotiksmultiplatform.shared.cats.commonMain.store
 
 import com.dionep.kotiksmultiplatform.shared.mvi.Store
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.*
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStore.*
 
 internal interface CatsStore : Store<Intent, State> {
 

@@ -1,7 +1,7 @@
-package com.dionep.kotiksmultiplatform.shared.cats.integration
+package com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration
 
-import com.dionep.kotiksmultiplatform.shared.cats.CatsView.*
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.*
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.CatsView.*
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStore.*
 
 internal fun State.toModel(): Model =
     Model(

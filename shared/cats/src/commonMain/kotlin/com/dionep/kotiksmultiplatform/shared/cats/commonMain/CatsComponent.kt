@@ -1,16 +1,16 @@
-package com.dionep.kotiksmultiplatform.shared.cats
+package com.dionep.kotiksmultiplatform.shared.cats.commonMain
 
 import com.badoo.reaktive.disposable.scope.DisposableScope
 import com.badoo.reaktive.disposable.scope.disposableScope
 import com.badoo.reaktive.observable.map
-import com.dionep.kotiksmultiplatform.shared.cats.CatsView.*
-import com.dionep.kotiksmultiplatform.shared.cats.datasource.CatsDataSource
-import com.dionep.kotiksmultiplatform.shared.cats.integration.CatsStoreNetwork
-import com.dionep.kotiksmultiplatform.shared.cats.integration.CatsStoreParser
-import com.dionep.kotiksmultiplatform.shared.cats.integration.toIntent
-import com.dionep.kotiksmultiplatform.shared.cats.integration.toModel
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStore.*
-import com.dionep.kotiksmultiplatform.shared.cats.store.CatsStoreImpl
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.CatsView.*
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.datasource.CatsDataSource
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration.CatsStoreNetwork
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration.CatsStoreParser
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration.toIntent
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.integration.toModel
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStore.*
+import com.dionep.kotiksmultiplatform.shared.cats.commonMain.store.CatsStoreImpl
 
 class CatsComponent internal constructor(dataSource: CatsDataSource){
 
