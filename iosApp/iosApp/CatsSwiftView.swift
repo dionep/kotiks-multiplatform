@@ -29,7 +29,6 @@ struct CatsSwiftView: View {
     
     private var content: some View {
         let model: CatsViewModel! = self.proxy.model
-        
         return Group {
             if (model == nil) {
                 EmptyView()

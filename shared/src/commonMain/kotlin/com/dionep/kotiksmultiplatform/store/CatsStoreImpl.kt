@@ -5,6 +5,7 @@ import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
 import com.dionep.kotiksmultiplatform.shared.model.Fact
+import com.dionep.kotiksmultiplatform.shared.mvi.StoreHelper
 import com.dionep.kotiksmultiplatform.store.CatsStore.Intent
 import com.dionep.kotiksmultiplatform.store.CatsStore.State
 
@@ -12,13 +13,22 @@ internal class CatsStoreImpl(
     private val network: Network,
     private val parser: Parser
 ): CatsStore, DisposableScope by DisposableScope() {
-    override val state: State = State()
+
+    private val helper = StoreHelper(State(), ::handleIntent, ::reduce).scope()
+    override val state: State = helper.state
 
     override fun onNext(value: Intent) {
+        helper.onIntent(value)
     }
 
     override fun subscribe(observer: ObservableObserver<State>) {
+        helper.subscribe(observer)
     }
+
+    private fun handleIntent(state: State, intent: Intent): Observable<Effect> =
+        when (intent) {
+            is Intent.Load -> load(network, parser)
+        }
 
     private fun load(network: Network, parser: Parser) =
         network.load()

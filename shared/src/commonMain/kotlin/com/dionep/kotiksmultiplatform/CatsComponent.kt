@@ -10,6 +10,7 @@ import com.dionep.kotiksmultiplatform.integration.CatsStoreNetwork
 import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
 import com.dionep.kotiksmultiplatform.integration.toIntent
 import com.dionep.kotiksmultiplatform.integration.toModel
+import com.dionep.kotiksmultiplatform.shared.mvi.StoreHelper
 import com.dionep.kotiksmultiplatform.store.CatsStore.*
 import com.dionep.kotiksmultiplatform.store.CatsStoreImpl
 

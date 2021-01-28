@@ -14,7 +14,8 @@ class CatsProxy: AbstractMviView<CatsViewModel, CatsViewEvent>, CatsView, Observ
     @Published var model: CatsViewModel?
     
     override func render(model: Any) {
-        self.model = model as! CatsViewModel
+        print(model)
+        self.model = model as? CatsViewModel
     }
     
 }
