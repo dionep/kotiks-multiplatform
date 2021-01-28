@@ -11,7 +11,8 @@ internal interface CatsStore : Store<Intent, State> {
 
     data class State(
         val isLoading: Boolean = false,
-        val data: Data = Data.CatFacts()
+        val data: Data = Data.CatFacts(),
+        val error: Throwable? = null
     ) {
 
         sealed class Data {

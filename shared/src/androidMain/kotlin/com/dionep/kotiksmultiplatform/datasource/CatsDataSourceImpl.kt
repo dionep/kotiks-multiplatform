@@ -14,7 +14,7 @@ internal class CatsDataSourceImpl : CatsDataSource {
         singleFromFunction {
             val url = URL(makeCatsFactsUrl())
             val connection = url.openConnection() as HttpURLConnection
-
+            println("load triggered")
             connection
                 .inputStream
                 .bufferedReader()

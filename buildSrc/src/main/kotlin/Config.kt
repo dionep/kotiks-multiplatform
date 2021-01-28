@@ -65,11 +65,11 @@ fun Project.setupMultiplatform() {
 
 fun Project.setupAndroidSdkVersions() {
     android {
-        compileSdkVersion(29)
+        compileSdkVersion(30)
 
         defaultConfig {
-            targetSdkVersion(29)
-            minSdkVersion(21)
+            targetSdkVersion(30)
+            minSdkVersion(23)
         }
     }
 }

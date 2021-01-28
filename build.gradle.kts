@@ -22,17 +22,10 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
 repositories {
     mavenCentral()
-}
-
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
-    }
 }

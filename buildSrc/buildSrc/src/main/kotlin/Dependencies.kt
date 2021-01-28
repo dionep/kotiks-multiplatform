@@ -70,6 +70,13 @@ object Dependencies {
             object RecyclerView :
                 Dependency(group = AndroidX.RecyclerView, name = "recyclerview", version = "1.1.0")
         }
+        object Fragment : Group(name = "androidx.fragment") {
+            object Ktx : Dependency(group = this, name = "fragment-ktx", version = "1.2.5")
+        }
+
+        object Lifecycle : Group(name = "androidx.lifecycle") {
+            object CommonJava8 : Dependency(group = this, name = "lifecycle-common-java8", version = "2.2.0")
+        }
 
         object ConstraintLayout : Group(name = "androidx.constraintlayout") {
             object ConstraintLayout : Dependency(
@@ -116,6 +123,10 @@ object Dependencies {
         object Picasso : Group(name = "com.squareup.picasso") {
             object Picasso : Dependency(group = Squareup.Picasso, name = "picasso", version = "2.71828")
         }
+    }
+
+    object RereKt : Group(name = "com.github.Rere-kt") {
+        object Rekukler : Dependency(group = this, name = "Rekukler", version = "1.0.0-alpha35")
     }
 
     open class Group(val name: String)

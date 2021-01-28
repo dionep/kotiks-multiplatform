@@ -8,7 +8,8 @@ object Modules {
     object Shared : Group("shared") {
         object Mvi : Module(group = this, name = "mvi")
         object Model : Module(group = this, name = "model")
-        object Cats : Module(group = this, name = "cats")
+
+        override fun toString() = ":shared"
     }
 
     open class Group(val groupName: String = "")

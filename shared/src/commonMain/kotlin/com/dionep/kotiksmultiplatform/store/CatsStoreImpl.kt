@@ -33,21 +33,23 @@ internal class CatsStoreImpl(
     private fun load(network: Network, parser: Parser) =
         network.load()
             .flatMap(parser::parse)
-            .flatMapIterable { it }
+            .flatMapIterable {
+                println("facts: $it")
+                it
+            }
             .map { it.text }
             .toList()
             .map(Effect::SuccessLoaded)
             .observeOn(mainScheduler)
             .asObservable()
-            .defaultIfEmpty(Effect.Failure)
             .startWithValue(Effect.StartLoading)
-            .onErrorComplete()
+            .onErrorReturn { Effect.Failure(it) }
 
     private fun reduce(state: State, effect: Effect): State =
         when(effect) {
             is Effect.StartLoading -> state.copy(isLoading = true)
             is Effect.SuccessLoaded -> state.copy(isLoading = false, data = State.Data.CatFacts(effect.imageUrls))
-            is Effect.Failure -> state.copy(isLoading = false, data = State.Data.Error)
+            is Effect.Failure -> state.copy(isLoading = false, data = State.Data.Error, error = effect.throwable)
         }
 
     interface Network {
@@ -61,7 +63,7 @@ internal class CatsStoreImpl(
     private sealed class Effect {
         object StartLoading : Effect()
         data class SuccessLoaded(val imageUrls: List<String>) : Effect()
-        object Failure : Effect()
+        data class Failure(val throwable: Throwable) : Effect()
     }
 
 }

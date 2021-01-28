@@ -24,6 +24,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    buildFeatures.viewBinding = true
+
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).all {
         kotlinOptions {
             jvmTarget = "1.8"
@@ -41,4 +43,8 @@ dependencies {
     implementation(Dependencies.AndroidX.Core.Ktx)
     implementation(Dependencies.Google.Android.Material.Material)
     implementation(Dependencies.Squareup.Picasso.Picasso)
+    implementation(Dependencies.RereKt.Rekukler)
+    implementation(Dependencies.AndroidX.Fragment.Ktx)
+    implementation(Dependencies.AndroidX.Lifecycle.CommonJava8)
+    implementation(project(Modules.Shared.toString()))
 }

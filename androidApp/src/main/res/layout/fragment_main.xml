@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/srl_facts"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Android Fragment!"
-        android:layout_gravity="center"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_facts"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-</FrameLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

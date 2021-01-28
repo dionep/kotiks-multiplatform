@@ -1,6 +1,5 @@
 package com.dionep.kotiksmultiplatform.integration
 
-import com.dionep.kotiksmultiplatform.CatsView
 import com.dionep.kotiksmultiplatform.CatsView.*
 import com.dionep.kotiksmultiplatform.store.CatsStore.*
 
@@ -14,7 +13,8 @@ internal fun State.toModel(): Model =
         catsFacts = when (data) {
             is State.Data.CatFacts -> data.facts
             is State.Data.Error -> emptyList()
-        }
+        },
+        error = error
     )
 
 internal fun Event.toIntent(): Intent =
