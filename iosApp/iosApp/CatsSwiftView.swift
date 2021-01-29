@@ -48,8 +48,6 @@ struct CatsSwiftView: View {
         }
     }
     
-    
-    
 }
 
 struct CatsSwiftView_Previews: PreviewProvider {
