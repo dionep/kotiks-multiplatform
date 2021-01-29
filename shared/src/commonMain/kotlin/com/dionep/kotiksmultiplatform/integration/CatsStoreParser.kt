@@ -13,7 +13,12 @@ import kotlinx.serialization.json.Json
 internal object CatsStoreParser : CatsStoreImpl.Parser {
 
     override fun parse(json: String): Single<List<Fact>> =
-        singleFromFunction<List<Fact>> { Json.decodeFromString(json) }
+        singleFromFunction<List<Fact>> {
+            Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+            }.decodeFromString(json)
+        }
             .subscribeOn(computationScheduler)
 
 }

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2644D9F125C1E1F600E8CE37 /* Cats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644D9F025C1E1F600E8CE37 /* Cats.swift */; };
 		2644D9F525C1E28E00E8CE37 /* CatsProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644D9F425C1E28E00E8CE37 /* CatsProxy.swift */; };
 		2644D9F925C1E2AC00E8CE37 /* CatsSwiftVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */; };
+		26FF781425C3DF5F0052DBF6 /* Cats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FF781325C3DF5F0052DBF6 /* Cats.swift */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
 		7555FF81242A565900829871 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF80242A565900829871 /* SceneDelegate.swift */; };
 		7555FF85242A565B00829871 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7555FF84242A565B00829871 /* Assets.xcassets */; };
@@ -53,9 +53,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2644D9F025C1E1F600E8CE37 /* Cats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cats.swift; sourceTree = "<group>"; };
 		2644D9F425C1E28E00E8CE37 /* CatsProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsProxy.swift; sourceTree = "<group>"; };
 		2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsSwiftVIew.swift; sourceTree = "<group>"; };
+		26FF781325C3DF5F0052DBF6 /* Cats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cats.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7E242A565900829871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7555FF80242A565900829871 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				7555FF86242A565B00829871 /* Preview Content */,
-				2644D9F025C1E1F600E8CE37 /* Cats.swift */,
 				2644D9F425C1E28E00E8CE37 /* CatsProxy.swift */,
 				2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */,
+				26FF781325C3DF5F0052DBF6 /* Cats.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -323,8 +323,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
-				2644D9F125C1E1F600E8CE37 /* Cats.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
+				26FF781425C3DF5F0052DBF6 /* Cats.swift in Sources */,
 				2644D9F525C1E28E00E8CE37 /* CatsProxy.swift in Sources */,
 				2644D9F925C1E2AC00E8CE37 /* CatsSwiftVIew.swift in Sources */,
 			);

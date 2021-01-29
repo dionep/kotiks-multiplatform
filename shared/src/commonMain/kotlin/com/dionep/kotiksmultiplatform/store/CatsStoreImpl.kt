@@ -17,6 +17,10 @@ internal class CatsStoreImpl(
     private val helper = StoreHelper(State(), ::handleIntent, ::reduce).scope()
     override val state: State = helper.state
 
+    init {
+        helper.onIntent(Intent.Load)
+    }
+
     override fun onNext(value: Intent) {
         helper.onIntent(value)
     }
@@ -33,10 +37,7 @@ internal class CatsStoreImpl(
     private fun load(network: Network, parser: Parser) =
         network.load()
             .flatMap(parser::parse)
-            .flatMapIterable {
-                println("facts: $it")
-                it
-            }
+            .flatMapIterable { it }
             .map { it.text }
             .toList()
             .map(Effect::SuccessLoaded)
