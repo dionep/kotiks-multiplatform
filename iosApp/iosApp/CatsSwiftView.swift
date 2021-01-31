@@ -12,7 +12,8 @@ import shared
 
 struct CatsSwiftView: View {
     
-    @ObservedObject var proxy: CatsProxy
+    @ObservedObject var proxy: CatsModelProxy
+    var componentHolder: ComponentHolder
     
     var body: some View {
         NavigationView {
@@ -20,7 +21,7 @@ struct CatsSwiftView: View {
             .navigationBarItems(
                 leading: Button("Title") {},
                 trailing: Button("Refresh") {
-                    self.proxy.accept(event: CatsViewEvent.Load())
+                    self.componentHolder.accept(event: CatsViewEvent.Load())
                 }
             )
         }
@@ -52,6 +53,6 @@ struct CatsSwiftView: View {
 
 struct CatsSwiftView_Previews: PreviewProvider {
     static var previews: some View {
-        CatsSwiftView(proxy: CatsProxy())
+        CatsSwiftView(proxy: CatsModelProxy(), componentHolder: ComponentHolder())
     }
 }

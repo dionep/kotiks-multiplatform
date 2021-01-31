@@ -10,31 +10,32 @@ import SwiftUI
 import shared
 
 struct Cats: View {
-    @State private var holder: ComponentHolder?
-    @State private var proxy = CatsProxy()
+    @State private var holder: ComponentHolder = ComponentHolder()
+    @State private var proxy = CatsModelProxy()
     
     var body: some View {
-        CatsSwiftView(proxy: proxy)
+        CatsSwiftView(proxy: proxy, componentHolder: holder)
             .onAppear(perform: onAppear)
             .onDisappear(perform: onDisappear)
     }
 
     private func onAppear() {
-        if (self.holder == nil) {
-            self.holder = ComponentHolder()
-        }
-        self.holder?.component.onViewCreated(view: self.proxy)
-        self.holder?.component.onStart()
+        self.holder.component.onViewCreated(view: self.proxy)
+        self.holder.component.onStart()
     }
     
     private func onDisappear() {
-        self.holder?.component.onViewDestroyed()
-        self.holder?.component.onStop()
+        self.holder.component.onViewDestroyed()
+        self.holder.component.onStop()
     }
 }
 
-private class ComponentHolder {
+class ComponentHolder {
     let component = CatsComponent()
+    
+    func accept(event: CatsViewEvent) {
+        component.accept(event: event)
+    }
     
     deinit {
         component.onDestroy()

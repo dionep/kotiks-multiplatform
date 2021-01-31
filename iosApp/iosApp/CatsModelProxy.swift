@@ -9,13 +9,13 @@
 import Foundation
 import shared
 
-class CatsProxy: AbstractMviView<CatsViewModel, CatsViewEvent>, CatsView, ObservableObject {
-
-    @Published var model: CatsViewModel?
+class CatsModelProxy: MviView, ObservableObject {
     
-    override func render(model: Any) {
-        print(model)
+    func render(model: Any) {
         self.model = model as? CatsViewModel
     }
+    
+    @Published var model: CatsViewModel?
+    
     
 }
