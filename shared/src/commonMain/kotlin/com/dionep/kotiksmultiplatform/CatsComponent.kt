@@ -9,7 +9,6 @@ import com.dionep.kotiksmultiplatform.datasource.CatsDataSourceFactory
 import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
 import com.dionep.kotiksmultiplatform.integration.toIntent
 import com.dionep.kotiksmultiplatform.integration.toModel
-import com.dionep.kotiksmultiplatform.store.CatsFeature.*
 import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl
 
 class CatsComponent internal constructor(dataSource: CatsDataSource){
@@ -32,7 +31,7 @@ class CatsComponent internal constructor(dataSource: CatsDataSource){
         val view = requireNotNull(view)
 
         startStopScope = disposableScope {
-            store.map(State::toModel).subscribeScoped(onNext = view::render)
+            store.map(CatsFeatureImpl.State::toModel).subscribeScoped(onNext = view::render)
             view.events.map(Event::toIntent).subscribeScoped(onNext = store::onNext)
         }
     }
