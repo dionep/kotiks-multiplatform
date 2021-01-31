@@ -1,51 +1,31 @@
 package com.dionep.kotiksmultiplatform
 
-import com.badoo.reaktive.disposable.scope.DisposableScope
-import com.badoo.reaktive.disposable.scope.disposableScope
-import com.badoo.reaktive.observable.map
-import com.dionep.kotiksmultiplatform.CatsView.*
+import com.dionep.kotiksmultiplatform.CatsView.Event
+import com.dionep.kotiksmultiplatform.CatsView.Model
 import com.dionep.kotiksmultiplatform.datasource.CatsDataSource
 import com.dionep.kotiksmultiplatform.datasource.CatsDataSourceFactory
 import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
 import com.dionep.kotiksmultiplatform.integration.toIntent
 import com.dionep.kotiksmultiplatform.integration.toModel
+import com.dionep.kotiksmultiplatform.shared.mvi.Component
+import com.dionep.kotiksmultiplatform.shared.mvi.MviView
 import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl
+import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl.Intent
+import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl.State
 
-class CatsComponent internal constructor(dataSource: CatsDataSource){
+class CatsComponent internal constructor(dataSource: CatsDataSource) : Component<Model, Event, State, Intent>(
+    stateMapper = { it.toModel() },
+    eventMapper = { it.toIntent() }
+) {
 
     constructor() : this(CatsDataSourceFactory())
 
-    private val store = CatsFeatureImpl(
+    override var view: MviView<Model, Event>? = null
+
+    override val feature: CatsFeatureImpl = CatsFeatureImpl(
         dataSource = dataSource,
         parser = CatsStoreParser
     )
 
-    private var view: CatsView? = null
-    private var startStopScope: DisposableScope? = null
-
-    fun onViewCreated(view: CatsView) {
-        this.view = view
-    }
-
-    fun onStart() {
-        val view = requireNotNull(view)
-
-        startStopScope = disposableScope {
-            store.map(CatsFeatureImpl.State::toModel).subscribeScoped(onNext = view::render)
-            view.events.map(Event::toIntent).subscribeScoped(onNext = store::onNext)
-        }
-    }
-
-    fun onStop() {
-        requireNotNull(startStopScope).dispose()
-    }
-
-    fun onViewDestroyed() {
-        view = null
-    }
-
-    fun onDestroy() {
-        store.dispose()
-    }
 
 }

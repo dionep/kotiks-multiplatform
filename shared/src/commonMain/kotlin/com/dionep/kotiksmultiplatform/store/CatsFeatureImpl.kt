@@ -8,7 +8,7 @@ import com.dionep.kotiksmultiplatform.shared.model.Fact
 import com.dionep.kotiksmultiplatform.shared.mvi.Feature
 import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl.*
 
-internal class CatsFeatureImpl(
+class CatsFeatureImpl(
     private val dataSource: CatsDataSource,
     private val parser: Parser
 ): Feature<Intent, State, Effect>(
