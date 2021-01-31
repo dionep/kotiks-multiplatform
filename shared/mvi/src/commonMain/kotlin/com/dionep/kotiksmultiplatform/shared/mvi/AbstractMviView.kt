@@ -6,9 +6,9 @@ import com.badoo.reaktive.subject.publish.PublishSubject
 abstract class AbstractMviView<in Model : Any, Event : Any> : MviView<Model, Event> {
 
     private val subject = PublishSubject<Event>()
-    override val events: Observable<Event> = subject
+//    override val events: Observable<Event> = subject
 
-    open fun accept(event: Event) {
-        subject.onNext(event)
-    }
+//    open fun accept(event: Event) {
+//        subject.onNext(event)
+//    }
 }

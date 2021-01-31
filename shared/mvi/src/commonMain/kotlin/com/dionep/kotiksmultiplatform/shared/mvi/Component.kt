@@ -23,8 +23,11 @@ abstract class Component<Model: Any, Event: Any, FeatureState: Any, FeatureInten
 
         startStopScope = disposableScope {
             feature.map(stateMapper).subscribeScoped(onNext = view::render)
-            view.events.map(eventMapper).subscribeScoped(onNext = feature::onNext)
         }
+    }
+
+    fun accept(event: Event) {
+        feature.onNext(eventMapper.invoke(event))
     }
 
     fun onStop() {

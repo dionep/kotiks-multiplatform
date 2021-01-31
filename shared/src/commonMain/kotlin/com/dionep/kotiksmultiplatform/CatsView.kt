@@ -1,7 +1,6 @@
 package com.dionep.kotiksmultiplatform
 
 import com.dionep.kotiksmultiplatform.CatsView.*
-import com.dionep.kotiksmultiplatform.shared.mvi.AbstractMviView
 import com.dionep.kotiksmultiplatform.shared.mvi.MviView
 
 interface CatsView: MviView<Model, Event> {
