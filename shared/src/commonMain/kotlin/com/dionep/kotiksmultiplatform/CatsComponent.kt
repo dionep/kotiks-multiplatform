@@ -6,7 +6,6 @@ import com.badoo.reaktive.observable.map
 import com.dionep.kotiksmultiplatform.CatsView.*
 import com.dionep.kotiksmultiplatform.datasource.CatsDataSource
 import com.dionep.kotiksmultiplatform.datasource.CatsDataSourceFactory
-import com.dionep.kotiksmultiplatform.integration.CatsStoreNetwork
 import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
 import com.dionep.kotiksmultiplatform.integration.toIntent
 import com.dionep.kotiksmultiplatform.integration.toModel
@@ -18,7 +17,7 @@ class CatsComponent internal constructor(dataSource: CatsDataSource){
     constructor() : this(CatsDataSourceFactory())
 
     private val store = CatsFeatureImpl(
-        network = CatsStoreNetwork(dataSource = dataSource),
+        dataSource = dataSource,
         parser = CatsStoreParser
     )
 
