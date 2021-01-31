@@ -16,9 +16,8 @@ kotlin {
                 implementation(project(Modules.Shared.Model.toString()))
                 implementation(Dependencies.Badoo.Reaktive.Utils)
                 implementation(Dependencies.Badoo.Reaktive.Reaktive)
-//                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.RuntimeCommon)
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1")
+                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Core)
+                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
             }
         }
 
@@ -29,15 +28,11 @@ kotlin {
         }
 
         androidMain {
-            dependencies {
-//                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Runtime)
-            }
+            dependencies {}
         }
 
         iosCommonMain {
-            dependencies {
-//                implementation(Dependencies.Jetbrains.Kotlinx.Serialization.RuntimeNative)
-            }
+            dependencies {}
         }
     }
 }
