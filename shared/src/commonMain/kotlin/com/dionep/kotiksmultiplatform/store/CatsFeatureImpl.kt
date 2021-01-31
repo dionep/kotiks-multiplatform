@@ -5,16 +5,16 @@ import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
 import com.dionep.kotiksmultiplatform.shared.model.Fact
-import com.dionep.kotiksmultiplatform.shared.mvi.StoreHelper
-import com.dionep.kotiksmultiplatform.store.CatsStore.Intent
-import com.dionep.kotiksmultiplatform.store.CatsStore.State
+import com.dionep.kotiksmultiplatform.shared.mvi.FeatureHelper
+import com.dionep.kotiksmultiplatform.store.CatsFeature.Intent
+import com.dionep.kotiksmultiplatform.store.CatsFeature.State
 
-internal class CatsStoreImpl(
+internal class CatsFeatureImpl(
     private val network: Network,
     private val parser: Parser
-): CatsStore, DisposableScope by DisposableScope() {
+): CatsFeature, DisposableScope by DisposableScope() {
 
-    private val helper = StoreHelper(State(), ::handleIntent, ::reduce).scope()
+    private val helper = FeatureHelper(State(), ::handleIntent, ::reduce).scope()
     override val state: State = helper.state
 
     init {

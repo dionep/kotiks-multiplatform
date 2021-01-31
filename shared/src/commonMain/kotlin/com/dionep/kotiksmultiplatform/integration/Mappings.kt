@@ -1,7 +1,7 @@
 package com.dionep.kotiksmultiplatform.integration
 
 import com.dionep.kotiksmultiplatform.CatsView.*
-import com.dionep.kotiksmultiplatform.store.CatsStore.*
+import com.dionep.kotiksmultiplatform.store.CatsFeature.*
 
 internal fun State.toModel(): Model =
     Model(

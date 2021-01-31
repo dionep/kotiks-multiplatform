@@ -6,7 +6,7 @@ import com.badoo.reaktive.observable.ObservableObserver
 import com.badoo.reaktive.subject.behavior.BehaviorSubject
 import com.badoo.reaktive.utils.ensureNeverFrozen
 
-class StoreHelper<in Intent : Any, out State : Any, in Effect : Any>(
+class FeatureHelper<in Intent : Any, out State : Any, in Effect : Any>(
     initialState: State,
     private val actor: Actor<State, Intent, Effect>,
     private val reducer: Reducer<State, Effect>

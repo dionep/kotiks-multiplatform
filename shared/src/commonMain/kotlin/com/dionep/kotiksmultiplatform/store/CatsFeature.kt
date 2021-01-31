@@ -1,9 +1,9 @@
 package com.dionep.kotiksmultiplatform.store
 
-import com.dionep.kotiksmultiplatform.shared.mvi.Store
-import com.dionep.kotiksmultiplatform.store.CatsStore.*
+import com.dionep.kotiksmultiplatform.shared.mvi.Feature
+import com.dionep.kotiksmultiplatform.store.CatsFeature.*
 
-internal interface CatsStore : Store<Intent, State> {
+internal interface CatsFeature : Feature<Intent, State> {
 
     sealed class Intent {
         object Load : Intent()
