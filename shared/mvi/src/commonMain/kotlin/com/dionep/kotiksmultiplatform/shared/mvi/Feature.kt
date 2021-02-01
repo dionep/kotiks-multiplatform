@@ -10,11 +10,13 @@ import com.badoo.reaktive.subject.behavior.BehaviorSubject
 import com.badoo.reaktive.subject.publish.PublishSubject
 import com.badoo.reaktive.utils.ensureNeverFrozen
 
-open class Feature<out State, Cmd, Msg: Any, out News>(
+class Feature<out State, Cmd, Msg: Any, out News>(
     initialState: State,
     initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
-    private val commandHandler: (Cmd) -> Observable<SideEffect<Msg, News>>
+    private val commandHandler: (Cmd) -> Observable<SideEffect<Msg, News>>,
+    stateListener: (State) -> Unit,
+    newsListener: (News) -> Unit
 ) : DisposableScope by DisposableScope() {
 
     private val stateSubject = BehaviorSubject(initialState).ensureNeverFrozen().scope(CompleteCallback::onComplete)
@@ -34,6 +36,8 @@ open class Feature<out State, Cmd, Msg: Any, out News>(
                     }
                 )
         }
+        stateSubject.subscribe { stateListener.invoke(it) }
+        newsSubject.subscribe { newsListener.invoke(it) }
         msgSubject
             .subscribeScoped(
                 isThreadLocal = true,

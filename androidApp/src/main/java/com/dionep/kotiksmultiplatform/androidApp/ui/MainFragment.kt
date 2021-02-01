@@ -2,8 +2,9 @@ package com.dionep.kotiksmultiplatform.androidApp.ui
 
 import android.os.Bundle
 import android.view.View
-import com.dionep.kotiksmultiplatform.CatsComponent
-import com.dionep.kotiksmultiplatform.CatsView.*
+import android.widget.Toast
+import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent
+import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
 import com.dionep.kotiksmultiplatform.androidApp.R
 import com.dionep.kotiksmultiplatform.androidApp.base.MviFragment
 import com.dionep.kotiksmultiplatform.androidApp.databinding.FragmentMainBinding
@@ -12,11 +13,11 @@ import com.dionep.kotiksmultiplatform.androidApp.utils.viewBinding
 import com.rerekt.rekukler.MultiBindingAdapter
 import com.rerekt.rekukler.configure
 
-class MainFragment : MviFragment<UiState, UiNews, UiEvents>(R.layout.fragment_main) {
+class MainFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
 
     private val viewBinding by viewBinding(FragmentMainBinding::bind)
 
-    override val component by lazy { CatsComponent() }
+    override val component by lazy { FactsFeatureComponent() }
 
     private val factsAdapter by lazy {
         MultiBindingAdapter(
@@ -30,7 +31,7 @@ class MainFragment : MviFragment<UiState, UiNews, UiEvents>(R.layout.fragment_ma
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
         viewBinding.srlFacts.setOnRefreshListener {
-            component.accept(UiEvents.Load)
+            component.accept(Msg.Load)
         }
     }
 
@@ -38,13 +39,15 @@ class MainFragment : MviFragment<UiState, UiNews, UiEvents>(R.layout.fragment_ma
         viewBinding.rvFacts.configure(factsAdapter) {}
     }
 
-    override fun render(state: UiState) {
+    override fun renderState(state: State) {
         factsAdapter.items = state.facts
         viewBinding.srlFacts.isRefreshing = state.isLoading
     }
 
-    override fun handleNews(news: UiNews) {
-        println(news)
+    override fun handleNews(news: News) {
+        when (news) {
+            News.Failure -> Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

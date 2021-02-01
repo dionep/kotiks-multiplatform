@@ -4,39 +4,33 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.dionep.kotiksmultiplatform.shared.mvi.Component
-import com.dionep.kotiksmultiplatform.shared.mvi.MviView
+import com.dionep.kotiksmultiplatform.base.MviComponent
 
-abstract class MviFragment<UiState: Any, UiNews: Any, UiEvents: Any>(@LayoutRes layoutResId: Int) :
-    Fragment(layoutResId),
-    MviView<UiState, UiNews, UiEvents>
+abstract class MviFragment<State, Msg: Any, News>(@LayoutRes layoutResId: Int) :
+    Fragment(layoutResId)
 {
 
-    abstract val component: Component<*, *, *, UiState, UiNews, UiEvents>
+    abstract val component: MviComponent<State, Msg, News>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        component.onViewCreated(this)
         super.onViewCreated(view, savedInstanceState)
+        component.bindListeners(
+            stateListener = ::renderState,
+            newsListener = ::handleNews
+        )
     }
 
-    override fun onStart() {
-        super.onStart()
-        component.onStart()
-    }
-
-    override fun onStop() {
-        component.onStop()
-        super.onStop()
-    }
+    abstract fun renderState(state: State)
+    abstract fun handleNews(news: News)
 
     override fun onDestroyView() {
-        component.onViewDestroyed()
+        component.dispose()
         super.onDestroyView()
     }
 
     override fun onDestroy() {
-        component.onDestroy()
         super.onDestroy()
+        component.dispose()
     }
 
 }
