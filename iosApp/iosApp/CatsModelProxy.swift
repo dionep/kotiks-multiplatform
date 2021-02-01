@@ -11,11 +11,13 @@ import shared
 
 class CatsModelProxy: MviView, ObservableObject {
     
-    func render(model: Any) {
-        self.model = model as? CatsViewModel
+    func handleNews(news: Any) {}
+    
+    func render(state: Any) {
+        self.model = state as? CatsViewUiState
     }
     
-    @Published var model: CatsViewModel?
+    @Published var model: CatsViewUiState?
     
     
 }

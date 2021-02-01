@@ -21,7 +21,7 @@ struct CatsSwiftView: View {
             .navigationBarItems(
                 leading: Button("Title") {},
                 trailing: Button("Refresh") {
-                    self.componentHolder.accept(event: CatsViewEvent.Load())
+                    self.componentHolder.accept(event: CatsViewUiEvents.Load())
                 }
             )
         }
@@ -29,18 +29,16 @@ struct CatsSwiftView: View {
 
     
     private var content: some View {
-        let model: CatsViewModel! = self.proxy.model
+        let model: CatsViewUiState! = self.proxy.model
         return Group {
             if (model == nil) {
                 EmptyView()
-            } else if (model.isError) {
-                Text("Error loading cats facts")
             } else if (model.isLoading) {
                 Text("Loading.....")
             }
             else {
                 List {
-                    ForEach(model.catsFacts, id: \.self) { item in
+                    ForEach(model.facts, id: \.self) { item in
                         Text(item)
                             .listRowInsets(EdgeInsets())
                     }

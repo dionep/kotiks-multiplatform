@@ -33,8 +33,8 @@ struct Cats: View {
 class ComponentHolder {
     let component = CatsComponent()
     
-    func accept(event: CatsViewEvent) {
-        component.accept(event: event)
+    func accept(event: CatsViewUiEvents) {
+        component.accept(uiEvents: event)
     }
     
     deinit {
