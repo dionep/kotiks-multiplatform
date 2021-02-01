@@ -3,17 +3,19 @@ package com.dionep.kotiksmultiplatform
 import com.dionep.kotiksmultiplatform.CatsView.*
 import com.dionep.kotiksmultiplatform.shared.mvi.MviView
 
-interface CatsView: MviView<Model, Event> {
+interface CatsView : MviView<UiState, UiNews, UiEvents> {
 
-    data class Model(
+    data class UiState(
         val isLoading: Boolean,
-        val isError: Boolean,
-        val catsFacts: List<String>,
-        val error: Throwable?
+        val facts: List<String> = listOf()
     )
 
-    sealed class Event {
-        object Load : Event()
+    sealed class UiEvents {
+        object Load : UiEvents()
+    }
+
+    sealed class UiNews {
+        object Error : UiNews()
     }
 
 }

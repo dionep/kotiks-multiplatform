@@ -4,13 +4,13 @@ import com.badoo.reaktive.scheduler.computationScheduler
 import com.badoo.reaktive.single.Single
 import com.badoo.reaktive.single.singleFromFunction
 import com.badoo.reaktive.single.subscribeOn
-import com.dionep.kotiksmultiplatform.store.CatsFeatureImpl
+import com.dionep.kotiksmultiplatform.store.CatsFeature
 import com.dionep.kotiksmultiplatform.shared.model.Fact
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 
-internal object CatsStoreParser : CatsFeatureImpl.Parser {
+internal object CatsStoreParser : CatsFeature.Parser {
 
     override fun parse(json: String): Single<List<Fact>> =
         singleFromFunction<List<Fact>> {

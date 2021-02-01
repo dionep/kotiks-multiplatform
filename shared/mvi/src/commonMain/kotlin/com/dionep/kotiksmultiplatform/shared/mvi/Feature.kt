@@ -10,7 +10,7 @@ import com.badoo.reaktive.subject.behavior.BehaviorSubject
 import com.badoo.reaktive.subject.publish.PublishSubject
 import com.badoo.reaktive.utils.ensureNeverFrozen
 
-class Feature<out State, Cmd, Msg: Any, out News>(
+open class Feature<out State, Cmd, Msg: Any, out News>(
     initialState: State,
     initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
@@ -54,8 +54,8 @@ class Feature<out State, Cmd, Msg: Any, out News>(
     val news: Observable<News>
         get() = newsSubject
 
-    fun accept(msg: Any) {
-        msgSubject.onNext(msg as Msg)
+    fun accept(msg: Msg) {
+        msgSubject.onNext(msg)
     }
 
 }

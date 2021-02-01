@@ -7,12 +7,12 @@ import androidx.fragment.app.Fragment
 import com.dionep.kotiksmultiplatform.shared.mvi.Component
 import com.dionep.kotiksmultiplatform.shared.mvi.MviView
 
-abstract class MviFragment<Model: Any, Event: Any>(@LayoutRes layoutResId: Int) :
+abstract class MviFragment<UiState: Any, UiNews: Any, UiEvents: Any>(@LayoutRes layoutResId: Int) :
     Fragment(layoutResId),
-    MviView<Model, Event>
+    MviView<UiState, UiNews, UiEvents>
 {
 
-    abstract val component: Component<Model, Event, *, *>
+    abstract val component: Component<*, *, *, UiState, UiNews, UiEvents>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         component.onViewCreated(this)

@@ -4,17 +4,25 @@ import com.badoo.reaktive.disposable.scope.DisposableScope
 import com.badoo.reaktive.disposable.scope.disposableScope
 import com.badoo.reaktive.observable.map
 
-abstract class Component<Model: Any, Event: Any, FeatureState: Any, FeatureIntent: Any>(
-    private val stateMapper: (FeatureState) -> Model,
-    private val eventMapper: (Event) -> FeatureIntent
+abstract class Component<
+    FeatureState: Any,
+    FeatureNews: Any,
+    FeatureMsg: Any,
+    UiState: Any,
+    UiNews: Any,
+    UiEvents: Any
+>(
+    private val stateMapper: (FeatureState) -> UiState,
+    private val newsMapper: (FeatureNews) -> UiNews,
+    private val uiEventsMapper: (UiEvents) -> FeatureMsg
 ) {
 
-    abstract var view: MviView<Model, Event>?
-    abstract val feature: Feature<FeatureIntent, FeatureState, *>
+    abstract var view: MviView<UiState, UiNews, UiEvents>?
+    abstract val feature: Feature<FeatureState, *, FeatureMsg, FeatureNews>
 
     private var startStopScope: DisposableScope? = null
 
-    fun onViewCreated(view: MviView<Model, Event>) {
+    fun onViewCreated(view: MviView<UiState, UiNews, UiEvents>) {
         this.view = view
     }
 
@@ -22,12 +30,17 @@ abstract class Component<Model: Any, Event: Any, FeatureState: Any, FeatureInten
         val view = requireNotNull(view)
 
         startStopScope = disposableScope {
-            feature.map(stateMapper).subscribeScoped(onNext = view::render)
+            feature.state.subscribeScoped {
+                view.render(stateMapper.invoke(it))
+            }
+            feature.news.subscribeScoped {
+                view.handleNews(newsMapper.invoke(it))
+            }
         }
     }
 
-    fun accept(event: Event) {
-        feature.onNext(eventMapper.invoke(event))
+    fun accept(uiEvents: UiEvents) {
+        feature.accept(uiEventsMapper.invoke(uiEvents))
     }
 
     fun onStop() {

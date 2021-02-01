@@ -1,7 +1,8 @@
 package com.dionep.kotiksmultiplatform.shared.mvi
 
-interface MviView<in Model : Any, out Event : Any> {
+interface MviView<in UiState : Any, in UiNews : Any, out UiEvents> {
 
-    fun render(model: Model)
+    fun render(model: UiState)
+    fun handleNews(news: UiNews)
 
 }
