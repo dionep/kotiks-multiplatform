@@ -109,6 +109,9 @@ object Dependencies {
             object ReaktiveTesting :
                 Dependency(group = Badoo.Reaktive, name = "reaktive-testing", version = version)
 
+            object CoroutinesInterop :
+                    Dependency(group = Badoo.Reaktive, name = "coroutines-interop", version = version)
+
             object Utils : Dependency(group = Badoo.Reaktive, name = "utils", version = version)
         }
     }
@@ -126,6 +129,18 @@ object Dependencies {
 
     object RereKt : Group(name = "com.github.Rere-kt") {
         object Rekukler : Dependency(group = this, name = "Rekukler", version = "1.0.0-alpha35")
+    }
+
+    object Ktor : Group(name = "io.ktor") {
+        private const val version = "1.5.1"
+
+        object Core : Dependency(group = this, name = "ktor-client-core", version = version)
+        object Json : Dependency(group = this, name = "ktor-client-json", version = version)
+        object Logging : Dependency(group = this, name = "ktor-client-logging", version = version)
+        object Serialization : Dependency(group = this, name = "ktor-client-serialization", version = version)
+
+        object Ios : Dependency(group = this, name = "ktor-client-ios", version = version)
+        object Android : Dependency(group = this, name = "ktor-client-android", version = version)
     }
 
     open class Group(val name: String)

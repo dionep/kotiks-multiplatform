@@ -14,8 +14,15 @@ kotlin {
             dependencies {
                 api(project(Modules.Shared.Mvi.toString()))
                 implementation(project(Modules.Shared.Model.toString()))
+
                 implementation(Dependencies.Badoo.Reaktive.Utils)
                 implementation(Dependencies.Badoo.Reaktive.Reaktive)
+                implementation(Dependencies.Badoo.Reaktive.CoroutinesInterop)
+
+                implementation(Dependencies.Ktor.Json)
+                implementation(Dependencies.Ktor.Serialization)
+                implementation(Dependencies.Ktor.Logging)
+
                 implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Core)
                 implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
             }
@@ -28,11 +35,15 @@ kotlin {
         }
 
         androidMain {
-            dependencies {}
+            dependencies {
+                implementation(Dependencies.Ktor.Android)
+            }
         }
 
         iosCommonMain {
-            dependencies {}
+            dependencies {
+                implementation(Dependencies.Ktor.Ios) { isForce = true }
+            }
         }
     }
 }
