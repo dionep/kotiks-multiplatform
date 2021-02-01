@@ -1,40 +1,61 @@
 package com.dionep.kotiksmultiplatform.shared.mvi
 
-import com.badoo.reaktive.base.Consumer
-import com.badoo.reaktive.disposable.Disposable
+import com.badoo.reaktive.base.CompleteCallback
 import com.badoo.reaktive.disposable.scope.DisposableScope
 import com.badoo.reaktive.observable.Observable
-import com.badoo.reaktive.observable.ObservableObserver
+import com.badoo.reaktive.observable.observeOn
+import com.badoo.reaktive.observable.subscribe
+import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.subject.behavior.BehaviorSubject
+import com.badoo.reaktive.subject.publish.PublishSubject
 import com.badoo.reaktive.utils.ensureNeverFrozen
 
-abstract class Feature<in Intent : Any, out State : Any, in Effect: Any>(
+class Feature<out State, Cmd, Msg: Any, out News>(
     initialState: State,
-    private val actor: Actor<State, Intent, Effect>,
-    private val reducer: Reducer<State, Effect>
-) :
-    Consumer<Intent>,
-    Observable<State>,
-    DisposableScope by DisposableScope()
-{
+    initialMessages: Set<Msg> = setOf(),
+    private val reducer: (Msg, State) -> Update<State, Cmd>,
+    private val commandHandler: (Cmd) -> Observable<SideEffect<Msg, News>>
+) : DisposableScope by DisposableScope() {
+
+    private val stateSubject = BehaviorSubject(initialState).ensureNeverFrozen().scope(CompleteCallback::onComplete)
+    private val newsSubject = PublishSubject<News>().scope(CompleteCallback::onComplete)
+    private val msgSubject = PublishSubject<Msg>().scope(CompleteCallback::onComplete)
+    private val cmdSubject = PublishSubject<Cmd>().scope(CompleteCallback::onComplete)
 
     init {
-        ensureNeverFrozen()
+        cmdSubject.subscribe { cmd ->
+            commandHandler.invoke(cmd)
+                .observeOn(mainScheduler)
+                .subscribeScoped(
+                    isThreadLocal = true,
+                    onNext = { (msg, news) ->
+                        if (msg != null) msgSubject.onNext(msg)
+                        if (news != null) newsSubject.onNext(news)
+                    }
+                )
+        }
+        msgSubject
+            .subscribeScoped(
+                isThreadLocal = true,
+                onNext = { msg ->
+                    val (state, cmd) = reducer.invoke(msg, stateSubject.value)
+                    if (state != null) stateSubject.onNext(state)
+                    if (cmd != null) cmdSubject.onNext(cmd)
+                }
+            )
+        initialMessages.forEach { msgSubject.onNext(it) }
     }
 
-    private val subject = BehaviorSubject(initialState)
-    val state: State get() = subject.value
+    fun getCurrentState(): State = stateSubject.value
 
-    override fun onNext(value: Intent) {
-        actor(subject.value, value).subscribeScoped(isThreadLocal = true, onNext = ::handleEffect)
-    }
+    val state: Observable<State>
+        get() = stateSubject
 
-    private fun handleEffect(effect: Effect) {
-        subject.onNext(reducer(subject.value, effect))
-    }
+    val news: Observable<News>
+        get() = newsSubject
 
-    override fun subscribe(observer: ObservableObserver<State>) {
-        subject.subscribe(observer)
+    fun accept(msg: Any) {
+        msgSubject.onNext(msg as Msg)
     }
 
 }
