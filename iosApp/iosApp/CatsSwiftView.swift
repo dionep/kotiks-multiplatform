@@ -12,8 +12,8 @@ import shared
 
 struct CatsSwiftView: View {
     
-    @ObservedObject var proxy: CatsModelProxy
     var componentHolder: ComponentHolder
+    @ObservedObject var stateProxy: FactsStateProxy
     
     var body: some View {
         NavigationView {
@@ -21,7 +21,7 @@ struct CatsSwiftView: View {
             .navigationBarItems(
                 leading: Button("Title") {},
                 trailing: Button("Refresh") {
-                    self.componentHolder.accept(event: CatsViewUiEvents.Load())
+                    self.componentHolder.component.accept(msg: FactsFeatureComponent.MsgLoad())
                 }
             )
         }
@@ -29,16 +29,17 @@ struct CatsSwiftView: View {
 
     
     private var content: some View {
-        let model: CatsViewUiState! = self.proxy.model
+        let state = self.stateProxy.state
         return Group {
-            if (model == nil) {
+            if (state == nil) {
                 EmptyView()
-            } else if (model.isLoading) {
+            }
+            else if (state!.isLoading) {
                 Text("Loading.....")
             }
             else {
                 List {
-                    ForEach(model.facts, id: \.self) { item in
+                    ForEach(state?.facts ?? [], id: \.self) { item in
                         Text(item)
                             .listRowInsets(EdgeInsets())
                     }
@@ -51,6 +52,9 @@ struct CatsSwiftView: View {
 
 struct CatsSwiftView_Previews: PreviewProvider {
     static var previews: some View {
-        CatsSwiftView(proxy: CatsModelProxy(), componentHolder: ComponentHolder())
+        CatsSwiftView(
+            componentHolder: ComponentHolder(),
+            stateProxy: FactsStateProxy()
+        )
     }
 }

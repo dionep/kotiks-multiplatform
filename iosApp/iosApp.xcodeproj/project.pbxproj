@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2644D9F525C1E28E00E8CE37 /* CatsModelProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644D9F425C1E28E00E8CE37 /* CatsModelProxy.swift */; };
 		2644D9F925C1E2AC00E8CE37 /* CatsSwiftVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */; };
+		2678B66425C7FE9800F7E2EA /* FactsStateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */; };
 		26FF781425C3DF5F0052DBF6 /* Cats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FF781325C3DF5F0052DBF6 /* Cats.swift */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
 		7555FF81242A565900829871 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF80242A565900829871 /* SceneDelegate.swift */; };
@@ -53,8 +53,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2644D9F425C1E28E00E8CE37 /* CatsModelProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsModelProxy.swift; sourceTree = "<group>"; };
 		2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsSwiftVIew.swift; sourceTree = "<group>"; };
+		2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsStateProxy.swift; sourceTree = "<group>"; };
 		26FF781325C3DF5F0052DBF6 /* Cats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cats.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF7E242A565900829871 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,7 +128,6 @@
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				7555FF86242A565B00829871 /* Preview Content */,
-				2644D9F425C1E28E00E8CE37 /* CatsModelProxy.swift */,
 				2644D9F825C1E2AC00E8CE37 /* CatsSwiftVIew.swift */,
 				26FF781325C3DF5F0052DBF6 /* Cats.swift */,
 			);
@@ -139,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				7555FF87242A565B00829871 /* Preview Assets.xcassets */,
+				2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -324,8 +324,8 @@
 			files = (
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
+				2678B66425C7FE9800F7E2EA /* FactsStateProxy.swift in Sources */,
 				26FF781425C3DF5F0052DBF6 /* Cats.swift in Sources */,
-				2644D9F525C1E28E00E8CE37 /* CatsModelProxy.swift in Sources */,
 				2644D9F925C1E2AC00E8CE37 /* CatsSwiftVIew.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

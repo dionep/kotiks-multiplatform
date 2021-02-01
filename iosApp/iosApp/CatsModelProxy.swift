@@ -9,7 +9,7 @@
 import Foundation
 import shared
 
-class CatsModelProxy: MviView, ObservableObject {
+class CatsModelProxy: ObservableObject {
     
     func handleNews(news: Any) {}
     
