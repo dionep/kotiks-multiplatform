@@ -1,4 +1,4 @@
-package com.dionep.kotiksmultiplatform.store
+package com.dionep.kotiksmultiplatform.feature
 
 import com.badoo.reaktive.observable.*
 import com.badoo.reaktive.scheduler.mainScheduler
@@ -8,7 +8,7 @@ import com.dionep.kotiksmultiplatform.shared.model.Fact
 import com.dionep.kotiksmultiplatform.shared.mvi.Feature
 import com.dionep.kotiksmultiplatform.shared.mvi.SideEffect
 import com.dionep.kotiksmultiplatform.shared.mvi.Update
-import com.dionep.kotiksmultiplatform.store.CatsFeature.*
+import com.dionep.kotiksmultiplatform.feature.CatsFeature.*
 
 class CatsFeature(
     private val dataSource: CatsDataSource,

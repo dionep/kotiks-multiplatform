@@ -6,8 +6,8 @@ import com.dionep.kotiksmultiplatform.datasource.CatsDataSourceFactory
 import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
 import com.dionep.kotiksmultiplatform.shared.mvi.Component
 import com.dionep.kotiksmultiplatform.shared.mvi.MviView
-import com.dionep.kotiksmultiplatform.store.CatsFeature
-import com.dionep.kotiksmultiplatform.store.CatsFeature.*
+import com.dionep.kotiksmultiplatform.feature.CatsFeature
+import com.dionep.kotiksmultiplatform.feature.CatsFeature.*
 
 class CatsComponent internal constructor(dataSource: CatsDataSource) :
     Component<State, News, Msg, UiState, UiNews, UiEvents>(

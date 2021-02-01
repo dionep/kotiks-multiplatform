@@ -42,7 +42,7 @@ kotlin {
 
         iosCommonMain {
             dependencies {
-                implementation(Dependencies.Ktor.Ios) { isForce = true }
+                implementation(Dependencies.Ktor.Ios)
             }
         }
     }
