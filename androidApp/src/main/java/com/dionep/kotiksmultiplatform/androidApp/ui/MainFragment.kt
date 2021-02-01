@@ -6,7 +6,7 @@ import android.widget.Toast
 import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent
 import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
 import com.dionep.kotiksmultiplatform.androidApp.R
-import com.dionep.kotiksmultiplatform.androidApp.base.MviFragment
+import com.dionep.kotiksmultiplatform.base.MviFragment
 import com.dionep.kotiksmultiplatform.androidApp.databinding.FragmentMainBinding
 import com.dionep.kotiksmultiplatform.androidApp.delegates.fact
 import com.dionep.kotiksmultiplatform.androidApp.utils.viewBinding
@@ -46,7 +46,10 @@ class MainFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
 
     override fun handleNews(news: News) {
         when (news) {
-            News.Failure -> Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            is News.Failure -> {
+                println(news.throwable)
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

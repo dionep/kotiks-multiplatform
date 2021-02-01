@@ -1,24 +1,17 @@
 package com.dionep.kotiksmultiplatform.features
 
-import com.badoo.reaktive.observable.map
 import com.badoo.reaktive.observable.onErrorReturn
-import com.badoo.reaktive.observable.toList
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
 import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
 import com.dionep.kotiksmultiplatform.base.MviComponent
-import com.dionep.kotiksmultiplatform.datasource.CatsDataSource
-import com.dionep.kotiksmultiplatform.datasource.CatsDataSourceFactory
-import com.dionep.kotiksmultiplatform.integration.CatsStoreParser
-import com.dionep.kotiksmultiplatform.integration.Parser
+import com.dionep.kotiksmultiplatform.repository.FactsRepository
 import com.dionep.kotiksmultiplatform.shared.mvi.*
+import org.koin.core.*
 
-class FactsFeatureComponent internal constructor(dataSource: CatsDataSource)
-    : MviComponent<State, Msg, News>() {
+class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
-    constructor() : this(CatsDataSourceFactory())
-
-    private val parser: Parser = CatsStoreParser
+    private val factsRepository by inject<FactsRepository>()
 
     override val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
@@ -33,15 +26,11 @@ class FactsFeatureComponent internal constructor(dataSource: CatsDataSource)
         commandHandler = { cmd ->
             when (cmd) {
                 is Cmd.Load ->
-                    dataSource.load()
-                        .flatMap(parser::parse)
-                        .flatMapIterable { it }
-                        .map { it.text }
-                        .toList()
+                    factsRepository.getFacts()
                         .map { SideEffect<Msg, News>(Msg.SetFacts(it)) }
                         .observeOn(mainScheduler)
                         .asObservable()
-                        .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure) }
+                        .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure(it)) }
             }
         },
         stateListener = { stateListener.invoke(it) },
@@ -64,7 +53,7 @@ class FactsFeatureComponent internal constructor(dataSource: CatsDataSource)
     }
 
     sealed class News {
-        object Failure : News()
+        data class Failure(val throwable: Throwable) : News()
     }
 
 }

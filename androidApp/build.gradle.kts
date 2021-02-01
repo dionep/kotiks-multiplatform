@@ -5,6 +5,11 @@ plugins {
 
 setupAndroidSdkVersions()
 
+repositories {
+    maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
+}
+
+
 android {
     defaultConfig {
         applicationId = "com.dionep.kotliksmultiplatform.androidApp"
@@ -47,4 +52,5 @@ dependencies {
     implementation(Dependencies.AndroidX.Fragment.Ktx)
     implementation(Dependencies.AndroidX.Lifecycle.CommonJava8)
     implementation(project(Modules.Shared.toString()))
+    implementation(Dependencies.Koin.Core)
 }

@@ -1,13 +1,13 @@
-package com.dionep.kotiksmultiplatform.androidApp.base
+package com.dionep.kotiksmultiplatform.base
 
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import com.dionep.kotiksmultiplatform.base.MviComponent
+import org.koin.core.KoinComponent
 
 abstract class MviFragment<State, Msg: Any, News>(@LayoutRes layoutResId: Int) :
-    Fragment(layoutResId)
+    Fragment(layoutResId), KoinComponent
 {
 
     abstract val component: MviComponent<State, Msg, News>

@@ -128,7 +128,7 @@ object Dependencies {
     }
 
     object RereKt : Group(name = "com.github.Rere-kt") {
-        object Rekukler : Dependency(group = this, name = "Rekukler", version = "1.0.0-alpha35")
+        object Rekukler : Dependency(group = this, name = "Rekukler", version = "1.0.0-alpha37")
     }
 
     object Ktor : Group(name = "io.ktor") {
@@ -141,6 +141,12 @@ object Dependencies {
 
         object Ios : Dependency(group = this, name = "ktor-client-ios", version = version)
         object Android : Dependency(group = this, name = "ktor-client-android", version = version)
+    }
+
+    object Koin : Group(name = "org.koin") {
+        private const val version = "3.0.1-alpha-2"
+
+        object Core : Dependency(group = this, name = "koin-core", version = version)
     }
 
     open class Group(val name: String)

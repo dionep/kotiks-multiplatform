@@ -7,13 +7,18 @@ plugins {
 setupMultiplatform()
 setupCatsBinaries()
 
+repositories {
+    maven(url = "https://dl.bintray.com/touchlabpublic/kotlin") // TODO remove this once Koin is officially published
+}
+
 kotlin {
 
     sourceSets {
         commonMain {
             dependencies {
                 api(project(Modules.Shared.Mvi.toString()))
-                implementation(project(Modules.Shared.Model.toString()))
+                api(project(Modules.Shared.Model.toString()))
+                api(Dependencies.Koin.Core)
 
                 implementation(Dependencies.Badoo.Reaktive.Utils)
                 implementation(Dependencies.Badoo.Reaktive.Reaktive)
@@ -36,7 +41,10 @@ kotlin {
 
         androidMain {
             dependencies {
+                api(Dependencies.Koin.Core)
                 implementation(Dependencies.Ktor.Android)
+                implementation(Dependencies.AndroidX.Core.Ktx)
+                implementation(Dependencies.AndroidX.Fragment.Ktx)
             }
         }
 

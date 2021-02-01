@@ -12,9 +12,14 @@ import io.ktor.client.request.*
 
 class NetworkSourceImpl : NetworkSource {
 
-    private val httpClient: HttpClient = HttpClient() {
+    private val httpClient: HttpClient = HttpClient {
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer(
+                kotlinx.serialization.json.Json {
+                    isLenient = true
+                    ignoreUnknownKeys = true
+                }
+            )
         }
         install(Logging) {
             logger = Logger.DEFAULT
@@ -24,7 +29,7 @@ class NetworkSourceImpl : NetworkSource {
 
     override fun getFacts(): Single<List<Fact>> =
         singleFromCoroutine {
-            httpClient.get(Constants.Api.BASE_URL + "/facts")
+            httpClient.get(Constants.Api.BASE_URL + "facts")
         }
 
 }
