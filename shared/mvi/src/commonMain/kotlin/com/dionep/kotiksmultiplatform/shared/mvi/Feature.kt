@@ -52,12 +52,6 @@ class Feature<out State, Cmd, Msg: Any, out News>(
 
     fun getCurrentState(): State = stateSubject.value
 
-    val state: Observable<State>
-        get() = stateSubject
-
-    val news: Observable<News>
-        get() = newsSubject
-
     fun accept(msg: Msg) {
         msgSubject.onNext(msg)
     }

@@ -1,6 +1,7 @@
 package com.dionep.kotiksmultiplatform.features
 
 import com.badoo.reaktive.observable.onErrorReturn
+import com.badoo.reaktive.scheduler.ioScheduler
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
 import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
@@ -28,6 +29,7 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                 is Cmd.Load ->
                     factsRepository.getFacts()
                         .map { SideEffect<Msg, News>(Msg.SetFacts(it)) }
+                        .subscribeOn(ioScheduler)
                         .observeOn(mainScheduler)
                         .asObservable()
                         .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure(it)) }
