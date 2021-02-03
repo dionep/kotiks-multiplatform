@@ -9,11 +9,13 @@ application {
 }
 
 dependencies {
-//    implementation(project(Modules.Model.toString()))
     implementation(kotlin("stdlib"))
     implementation(Dependencies.KtorBackend.Netty)
     implementation(Dependencies.KtorBackend.ServerCore)
     implementation(Dependencies.Logback.Classic)
+    implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
+    implementation(Dependencies.KtorBackend.Gson)
+    implementation(Dependencies.Ktor.Json)
 }
 
 tasks {
