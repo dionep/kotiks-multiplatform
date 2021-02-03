@@ -1,2 +1,2 @@
 # kotiks-multiplatform
-Sample Kotlin Mobile Multiplatform(Android & iOS) application with MVI architecture
+Sample Kotlin Mobile Multiplatform(Android & iOS & Backend) application with MVI architecture
