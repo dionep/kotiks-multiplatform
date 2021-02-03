@@ -29,3 +29,7 @@ allprojects {
 repositories {
     mavenCentral()
 }
+
+tasks.create("stage") {
+    dependsOn(":backend:stage")
+}

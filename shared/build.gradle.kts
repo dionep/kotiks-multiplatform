@@ -17,7 +17,7 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(Modules.Shared.Mvi.toString()))
-                api(project(Modules.Shared.Model.toString()))
+                api(project(Modules.Model.toString()))
                 api(Dependencies.Koin.Core)
 
                 implementation(Dependencies.Badoo.Reaktive.Utils)

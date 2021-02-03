@@ -143,6 +143,19 @@ object Dependencies {
         object Android : Dependency(group = this, name = "ktor-client-android", version = version)
     }
 
+    object KtorBackend : Group(name = "io.ktor") {
+        private const val version = "1.5.1"
+
+        object ServerCore : Dependency(group = this, name = "ktor-server-core", version = version)
+        object Netty : Dependency(group = this, name = "ktor-server-netty", version = version)
+    }
+
+    object Logback : Group(name = "ch.qos.logback") {
+        private const val version = "1.2.3"
+
+        object Classic : Dependency(group = this, name = "logback-classic", version = version)
+    }
+
     object Koin : Group(name = "org.koin") {
         private const val version = "3.0.1-alpha-2"
 

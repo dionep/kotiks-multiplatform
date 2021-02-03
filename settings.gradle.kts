@@ -10,6 +10,7 @@ pluginManagement {
 }
 
 
+include(":model")
 include(":shared:mvi")
 include(":androidApp")
-include(":shared:model")
+include(":backend")

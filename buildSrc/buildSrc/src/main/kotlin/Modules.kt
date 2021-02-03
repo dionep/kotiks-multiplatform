@@ -5,9 +5,10 @@ object Modules {
         object Ios : Module(group = this, name = "iosApp")
     }
 
+    object Model : Module(group = Group(), name = "model")
+
     object Shared : Group("shared") {
         object Mvi : Module(group = this, name = "mvi")
-        object Model : Module(group = this, name = "model")
 
         override fun toString() = ":shared"
     }
