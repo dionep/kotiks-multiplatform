@@ -3,4 +3,5 @@
     <string name="error">Ошибка</string>
     <string name="add_fact_title">Adding a fact</string>
     <string name="add">Add</string>
+    <string name="app_name">Kotiks</string>
 </resources>

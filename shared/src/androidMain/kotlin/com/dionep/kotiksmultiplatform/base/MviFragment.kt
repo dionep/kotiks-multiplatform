@@ -33,4 +33,6 @@ abstract class MviFragment<State, Msg: Any, News>(@LayoutRes layoutResId: Int) :
         component.dispose()
     }
 
+    open fun onBackPressed() {}
+
 }
