@@ -41,7 +41,7 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
     }
 
     private fun setOnClickListeners() {
-        viewBinding.apply {
+        with(viewBinding) {
             srlFacts.setOnRefreshListener { component.accept(Msg.Load) }
             fabAddFact.setOnClickListener {
                 appActivity.goTo(AddFactFragment())

@@ -15,6 +15,7 @@ class Feature<out State, Cmd, Msg: Any, out News>(
     initialMessages: Set<Msg> = setOf(),
     private val reducer: (Msg, State) -> Update<State, Cmd>,
     private val commandHandler: (Cmd) -> Observable<SideEffect<Msg, News>>,
+    bootstrapper: Set<Observable<Msg>> = setOf(),
     stateListener: (State) -> Unit,
     newsListener: (News) -> Unit
 ) : DisposableScope by DisposableScope() {
@@ -48,6 +49,9 @@ class Feature<out State, Cmd, Msg: Any, out News>(
                 }
             )
         initialMessages.forEach { msgSubject.onNext(it) }
+        bootstrapper.forEach {
+            it.subscribeScoped { accept(it) }
+        }
     }
 
     fun getCurrentState(): State = stateSubject.value
