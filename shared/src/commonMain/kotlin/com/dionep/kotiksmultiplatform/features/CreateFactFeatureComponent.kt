@@ -1,0 +1,64 @@
+package com.dionep.kotiksmultiplatform.features
+
+import com.badoo.reaktive.observable.onErrorReturn
+import com.badoo.reaktive.scheduler.ioScheduler
+import com.badoo.reaktive.scheduler.mainScheduler
+import com.badoo.reaktive.single.asObservable
+import com.badoo.reaktive.single.map
+import com.badoo.reaktive.single.observeOn
+import com.badoo.reaktive.single.subscribeOn
+import com.dionep.kotiksmultiplatform.base.MviComponent
+import com.dionep.kotiksmultiplatform.features.CreateFactFeatureComponent.*
+import com.dionep.kotiksmultiplatform.repository.FactsRepository
+import com.dionep.kotiksmultiplatform.shared.mvi.Feature
+import com.dionep.kotiksmultiplatform.shared.mvi.SideEffect
+import com.dionep.kotiksmultiplatform.shared.mvi.Update
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+
+class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
+
+    private val factsRepository by inject<FactsRepository>()
+
+    override val feature = Feature<State, Cmd, Msg, News>(
+        initialState = State(),
+        reducer = { msg, state ->
+            when (msg) {
+                is Msg.Create -> Update(state.copy(isLoading = true), Cmd.Create(msg.text))
+                is Msg.StopLoading -> Update(state.copy(isLoading = false))
+            }
+        },
+        commandHandler = { cmd ->
+            when (cmd) {
+                is Cmd.Create ->
+                    factsRepository.createFact(cmd.text)
+                        .map { SideEffect<Msg, News>(Msg.StopLoading, News.CreateSuccess) }
+                        .subscribeOn(ioScheduler)
+                        .observeOn(mainScheduler)
+                        .asObservable()
+                        .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure("Error")) }
+            }
+        },
+        newsListener = { newsListener.invoke(it) },
+        stateListener = { stateListener.invoke(it) }
+    )
+
+    data class State(
+        val isLoading: Boolean = false
+    )
+
+    sealed class Msg {
+        data class Create(val text: String) : Msg()
+        object StopLoading : Msg()
+    }
+
+    sealed class Cmd {
+        data class Create(val text: String) : Cmd()
+    }
+
+    sealed class News {
+        data class Failure(val message: String) : News()
+        object CreateSuccess : News()
+    }
+
+}

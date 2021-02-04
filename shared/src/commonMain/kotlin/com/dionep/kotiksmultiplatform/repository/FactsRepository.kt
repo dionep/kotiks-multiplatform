@@ -16,5 +16,8 @@ class FactsRepository(
             .map { it.text }
             .toList()
 
+    fun createFact(text: String): Single<Boolean> =
+        networkSource.createFact(text)
+
 
 }
