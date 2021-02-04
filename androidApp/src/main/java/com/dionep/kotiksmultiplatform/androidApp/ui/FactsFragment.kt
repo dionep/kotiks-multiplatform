@@ -22,6 +22,9 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
 
     override val component by lazy { FactsFeatureComponent() }
 
+    private val appActivity: AppActivity
+        get() = activity as AppActivity
+
     private val factsAdapter by lazy {
         MultiBindingAdapter(
             fact {
@@ -34,15 +37,14 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
         setOnClickListeners()
+        println("onViewCreated")
     }
 
     private fun setOnClickListeners() {
         viewBinding.apply {
             srlFacts.setOnRefreshListener { component.accept(Msg.Load) }
             fabAddFact.setOnClickListener {
-//                childFragmentManager.commitNow(allowStateLoss = true) {
-//
-//                }
+                appActivity.goTo(AddFactFragment())
             }
         }
     }

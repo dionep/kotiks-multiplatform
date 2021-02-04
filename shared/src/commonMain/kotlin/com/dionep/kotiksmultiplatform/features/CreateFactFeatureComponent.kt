@@ -13,8 +13,7 @@ import com.dionep.kotiksmultiplatform.repository.FactsRepository
 import com.dionep.kotiksmultiplatform.shared.mvi.Feature
 import com.dionep.kotiksmultiplatform.shared.mvi.SideEffect
 import com.dionep.kotiksmultiplatform.shared.mvi.Update
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.core.*
 
 class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 

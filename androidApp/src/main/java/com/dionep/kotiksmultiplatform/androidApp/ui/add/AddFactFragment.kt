@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.dionep.kotiksmultiplatform.androidApp.R
 import com.dionep.kotiksmultiplatform.androidApp.databinding.FragmentAddFactBinding
+import com.dionep.kotiksmultiplatform.androidApp.ui.AppActivity
 import com.dionep.kotiksmultiplatform.androidApp.utils.viewBinding
 import com.dionep.kotiksmultiplatform.base.MviFragment
 import com.dionep.kotiksmultiplatform.features.CreateFactFeatureComponent
@@ -17,19 +18,32 @@ class AddFactFragment : MviFragment<State, Msg, News>(R.layout.fragment_add_fact
 
     override val component by lazy { CreateFactFeatureComponent() }
 
+    private val appActivity: AppActivity
+        get() = activity as AppActivity
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-        viewBinding.btnClose.setOnClickListener { onBackPressed() }
+        with(viewBinding) {
+            btnClose.setOnClickListener { onBackPressed() }
+            btnAdd.setOnClickListener {
+                component.accept(Msg.Create(etFact.text.toString()))
+            }
+            btnClose.setOnClickListener { appActivity.goBack() }
+        }
     }
 
     override fun renderState(state: State) {
         with(viewBinding) {
             viewLoading.isVisible = state.isLoading
         }
+    }
+
+    override fun onBackPressed() {
+        appActivity.goBack()
     }
 
     override fun handleNews(news: News) {
