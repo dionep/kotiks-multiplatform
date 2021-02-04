@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error">Ошибка</string>
+    <string name="add_fact_title">Adding a fact</string>
+    <string name="add">Add</string>
 </resources>
