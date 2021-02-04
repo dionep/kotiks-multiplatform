@@ -17,10 +17,13 @@ abstract class MviComponent<State, Msg: Any, News> {
         stateListener.invoke(feature.getCurrentState())
     }
 
-    fun dispose() {
-        feature.dispose()
+    fun disposeListeners() {
         stateListener = {}
         newsListener = {}
+    }
+
+    fun disposeFeature() {
+        feature.dispose()
     }
 
     fun accept(msg: Msg) {

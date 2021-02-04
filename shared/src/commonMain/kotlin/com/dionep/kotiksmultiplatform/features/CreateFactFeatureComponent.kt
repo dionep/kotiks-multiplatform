@@ -9,6 +9,7 @@ import com.badoo.reaktive.single.observeOn
 import com.badoo.reaktive.single.subscribeOn
 import com.dionep.kotiksmultiplatform.base.MviComponent
 import com.dionep.kotiksmultiplatform.features.CreateFactFeatureComponent.*
+import com.dionep.kotiksmultiplatform.features.changes.Changes
 import com.dionep.kotiksmultiplatform.repository.FactsRepository
 import com.dionep.kotiksmultiplatform.shared.mvi.Feature
 import com.dionep.kotiksmultiplatform.shared.mvi.SideEffect
@@ -18,6 +19,7 @@ import org.koin.core.*
 class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
     private val factsRepository by inject<FactsRepository>()
+    private val changes by inject<Changes>()
 
     override val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
@@ -31,7 +33,10 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
             when (cmd) {
                 is Cmd.Create ->
                     factsRepository.createFact(cmd.text)
-                        .map { SideEffect<Msg, News>(Msg.StopLoading, News.CreateSuccess) }
+                        .map {
+                            changes.onFactAdded()
+                            SideEffect<Msg, News>(Msg.StopLoading, News.CreateSuccess)
+                        }
                         .subscribeOn(ioScheduler)
                         .observeOn(mainScheduler)
                         .asObservable()

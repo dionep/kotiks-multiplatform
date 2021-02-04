@@ -50,7 +50,10 @@ class Feature<out State, Cmd, Msg: Any, out News>(
             )
         initialMessages.forEach { msgSubject.onNext(it) }
         bootstrapper.forEach {
-            it.subscribeScoped { accept(it) }
+            it.subscribeScoped(
+                isThreadLocal = true,
+                onNext = { msg -> accept(msg) }
+            )
         }
     }
 

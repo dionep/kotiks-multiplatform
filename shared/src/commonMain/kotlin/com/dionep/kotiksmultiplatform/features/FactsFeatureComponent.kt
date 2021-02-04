@@ -4,8 +4,10 @@ import com.badoo.reaktive.observable.onErrorReturn
 import com.badoo.reaktive.scheduler.ioScheduler
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.single.*
+import com.badoo.reaktive.observable.map
 import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
 import com.dionep.kotiksmultiplatform.base.MviComponent
+import com.dionep.kotiksmultiplatform.features.changes.Changes
 import com.dionep.kotiksmultiplatform.repository.FactsRepository
 import com.dionep.kotiksmultiplatform.shared.mvi.*
 import org.koin.core.*
@@ -13,6 +15,7 @@ import org.koin.core.*
 class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
     private val factsRepository by inject<FactsRepository>()
+    private val changes by inject<Changes>()
 
     override val feature = Feature<State, Cmd, Msg, News>(
         initialState = State(),
@@ -35,6 +38,10 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                         .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure(it)) }
             }
         },
+        bootstrapper = setOf(
+            changes.factAddedObservable
+                .map { Msg.Load }
+        ),
         stateListener = { stateListener.invoke(it) },
         newsListener = { newsListener.invoke(it) }
     )

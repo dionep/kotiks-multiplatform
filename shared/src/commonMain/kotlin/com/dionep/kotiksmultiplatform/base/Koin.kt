@@ -1,5 +1,6 @@
 package com.dionep.kotiksmultiplatform.base
 
+import com.dionep.kotiksmultiplatform.features.changes.Changes
 import com.dionep.kotiksmultiplatform.network.NetworkSource
 import com.dionep.kotiksmultiplatform.network.NetworkSourceImpl
 import com.dionep.kotiksmultiplatform.repository.FactsRepository
@@ -15,4 +16,5 @@ fun initKoin() = startKoin {
 val multiplatformModule = module {
     single<NetworkSource> { NetworkSourceImpl() }
     single { FactsRepository(get()) }
+    single { Changes() }
 }

@@ -23,9 +23,14 @@ abstract class MviFragment<State, Msg: Any, News>(@LayoutRes layoutResId: Int) :
     abstract fun renderState(state: State)
     abstract fun handleNews(news: News)
 
+    override fun onDestroyView() {
+        component.disposeListeners()
+        super.onDestroyView()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        component.dispose()
+        component.disposeFeature()
     }
 
     open fun onBackPressed() {}
