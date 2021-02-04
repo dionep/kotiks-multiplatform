@@ -10,11 +10,13 @@ application {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation(Dependencies.KtorBackend.Netty)
-    implementation(Dependencies.KtorBackend.ServerCore)
+    implementation(Dependencies.Backend.Ktor.Netty)
+    implementation(Dependencies.Backend.Ktor.ServerCore)
+    implementation(Dependencies.Backend.Ktor.Gson)
+    implementation(Dependencies.Backend.Database.JetbrainsExposed.Exposed)
+    implementation(Dependencies.Backend.Database.H2Database.H2)
     implementation(Dependencies.Logback.Classic)
     implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
-    implementation(Dependencies.KtorBackend.Gson)
     implementation(Dependencies.Ktor.Json)
 }
 

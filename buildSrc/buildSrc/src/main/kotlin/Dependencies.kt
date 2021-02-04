@@ -143,14 +143,6 @@ object Dependencies {
         object Android : Dependency(group = this, name = "ktor-client-android", version = version)
     }
 
-    object KtorBackend : Group(name = "io.ktor") {
-        private const val version = "1.5.1"
-
-        object ServerCore : Dependency(group = this, name = "ktor-server-core", version = version)
-        object Netty : Dependency(group = this, name = "ktor-server-netty", version = version)
-        object Gson : Dependency(group = this, name = "ktor-gson", version = version)
-    }
-
     object Logback : Group(name = "ch.qos.logback") {
         private const val version = "1.2.3"
 
@@ -161,6 +153,34 @@ object Dependencies {
         private const val version = "3.0.1-alpha-2"
 
         object Core : Dependency(group = this, name = "koin-core", version = version)
+    }
+
+    object Backend {
+
+        object Ktor : Group(name = "io.ktor") {
+            private const val version = "1.5.1"
+
+            object ServerCore : Dependency(group = this, name = "ktor-server-core", version = version)
+            object Netty : Dependency(group = this, name = "ktor-server-netty", version = version)
+            object Gson : Dependency(group = this, name = "ktor-gson", version = version)
+        }
+
+        object Database {
+
+            object JetbrainsExposed : Group(name = "org.jetbrains.exposed") {
+                private const val version = "0.12.1"
+
+                object Exposed : Dependency(group = this, name = "exposed", version = version)
+            }
+
+            object H2Database : Group(name = "com.h2database") {
+                private const val version = "1.4.191"
+
+                object H2 : Dependency(group = this, name = "h2", version = version)
+            }
+
+        }
+
     }
 
     open class Group(val name: String)
