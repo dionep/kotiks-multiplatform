@@ -4,6 +4,6 @@ import kotlinx.serialization.*
 
 @Serializable
 data class Fact(
-    val _id: String,
+    val id: String,
     val text: String,
 )
