@@ -179,6 +179,12 @@ object Dependencies {
                 object H2 : Dependency(group = this, name = "h2", version = version)
             }
 
+            object Zaxxer : Group(name = "com.zaxxer") {
+                private const val version = "2.7.8"
+
+                object HikariCP : Dependency(group = this, name = "HikariCP", version = version)
+            }
+
         }
 
     }

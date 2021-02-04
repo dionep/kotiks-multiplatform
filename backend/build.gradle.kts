@@ -15,6 +15,7 @@ dependencies {
     implementation(Dependencies.Backend.Ktor.Gson)
     implementation(Dependencies.Backend.Database.JetbrainsExposed.Exposed)
     implementation(Dependencies.Backend.Database.H2Database.H2)
+    implementation(Dependencies.Backend.Database.Zaxxer.HikariCP)
     implementation(Dependencies.Logback.Classic)
     implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
     implementation(Dependencies.Ktor.Json)
