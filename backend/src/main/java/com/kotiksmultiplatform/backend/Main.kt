@@ -2,6 +2,7 @@ package com.kotiksmultiplatform.backend
 
 import com.google.gson.GsonBuilder
 import com.kotiksmultiplatform.backend.repo.FactsRepository
+import com.kotiksmultiplatform.backend.routing.facts
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.gson.*
@@ -34,14 +35,10 @@ fun Application.module() {
 
     DatabaseConfig.connect()
 
-    val repo = FactsRepository()
-
     install(DefaultHeaders)
     install(CallLogging)
     install(Routing) {
-        get("/facts")  {
-            call.respond(repo.getFacts())
-        }
+        facts()
     }
 
 }
