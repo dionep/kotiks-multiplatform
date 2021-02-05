@@ -35,7 +35,7 @@ struct Cats: View {
     }
     
     private func onDisappear() {
-        self.componentHolder.component.dispose()
+        self.componentHolder.component.disposeListeners()
     }
 
 }
@@ -44,7 +44,7 @@ class ComponentHolder {
     let component = FactsFeatureComponent()
     
     deinit {
-        component.dispose()
+        component.disposeFeature()
     }
 }
 

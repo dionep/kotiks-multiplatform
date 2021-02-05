@@ -2,6 +2,7 @@ import UIKit
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -10,7 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         KoinKt.doInitKoin()
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: Cats())
+            window.rootViewController = UIHostingController(rootView: RootView().environmentObject(ViewRouter()))
             self.window = window
             window.makeKeyAndVisible()
         }

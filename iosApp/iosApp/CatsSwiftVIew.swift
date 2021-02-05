@@ -30,7 +30,6 @@ struct CatsSwiftView: View {
     
     private var content: some View {
         let state = self.stateProxy.state
-        print(state)
         return Group {
             if (state == nil) {
                 EmptyView()
@@ -42,9 +41,8 @@ struct CatsSwiftView: View {
                 List {
                     ForEach(state?.facts ?? [], id: \.self) { item in
                         Text(item)
-                            .listRowInsets(EdgeInsets())
                     }
-                }
+                }.listStyle(GroupedListStyle())
             }
         }
     }
