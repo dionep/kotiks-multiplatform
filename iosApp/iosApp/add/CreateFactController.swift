@@ -10,14 +10,14 @@ import Foundation
 import SwiftUI
 import shared
 
-struct AddFactController: View {
+struct CreateFactController: View {
     
     @State private var componentHolder: AddFactsComponentHolder = AddFactsComponentHolder()
-    @State private var stateProxy: AddFactProxy = AddFactProxy()
+    @State private var stateProxy: CreateFactProxy = CreateFactProxy()
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
-        AddFactView(
+        CreateFactView(
             componentHolder: componentHolder,
             stateProxy: stateProxy
         )

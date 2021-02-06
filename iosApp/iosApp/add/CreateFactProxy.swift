@@ -9,7 +9,7 @@
 import Foundation
 import shared
 
-class AddFactProxy: ObservableObject {
+class CreateFactProxy: ObservableObject {
     
     @Published var state: CreateFactFeatureComponent.State?
     

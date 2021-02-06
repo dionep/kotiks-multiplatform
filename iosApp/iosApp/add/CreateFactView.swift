@@ -10,10 +10,10 @@ import Foundation
 import SwiftUI
 import shared
 
-struct AddFactView: View {
+struct CreateFactView: View {
     
     var componentHolder: AddFactsComponentHolder
-    @ObservedObject var stateProxy: AddFactProxy
+    @ObservedObject var stateProxy: CreateFactProxy
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State private var factText: String = "Fact"

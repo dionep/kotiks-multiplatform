@@ -19,7 +19,7 @@ struct RootView: View {
                 FactsController().environmentObject(viewRouter)
                     .transition(.scale)
             case .addFact:
-                AddFactController().environmentObject(viewRouter)
+                CreateFactController().environmentObject(viewRouter)
                     .transition(.scale)
         }
     }
