@@ -12,7 +12,11 @@ import shared
 
 struct AddFactView: View {
     
+    var componentHolder: AddFactsComponentHolder
+    @ObservedObject var stateProxy: AddFactProxy
     @EnvironmentObject var viewRouter: ViewRouter
+    
+    @State private var factText: String = "Fact"
     
     var body: some View {
         NavigationView {
@@ -22,7 +26,7 @@ struct AddFactView: View {
                         viewRouter.navigateTo(screen: .facts)
                     },
                     trailing: Button("Save") {
-                        
+                        componentHolder.component.accept(msg: CreateFactFeatureComponent.MsgCreate(text: factText))
                     }
                 )
         }
@@ -30,7 +34,9 @@ struct AddFactView: View {
     }
     
     private var content: some View {
-        EmptyView()
+        VStack {
+            TextField("Enter your fact", text: $factText)
+        }
     }
     
 }

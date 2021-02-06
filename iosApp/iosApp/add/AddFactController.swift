@@ -8,13 +8,49 @@
 
 import Foundation
 import SwiftUI
+import shared
 
 struct AddFactController: View {
     
+    @State private var componentHolder: AddFactsComponentHolder = AddFactsComponentHolder()
+    @State private var stateProxy: AddFactProxy = AddFactProxy()
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
-        AddFactView().environmentObject(viewRouter)
+        AddFactView(
+            componentHolder: componentHolder,
+            stateProxy: stateProxy
+        )
+            .environmentObject(viewRouter)
+            .onAppear(perform: onAppear)
+            .onDisappear(perform: onDisappear)
     }
     
+    private func onAppear() {
+        componentHolder.component.bindListeners { (featureState: CreateFactFeatureComponent.State?) in
+            if (featureState != nil) {
+                self.stateProxy.updateState(newState: featureState!)
+            }
+        } newsListener: { (news: CreateFactFeatureComponent.News?) in
+            print(news ?? "NullNew")
+            switch news {
+                case CreateFactFeatureComponent.NewsCreateSuccess(): viewRouter.navigateTo(screen: .facts)
+                default: do {}
+            }
+        }
+
+    }
+    
+    private func onDisappear() {
+        self.componentHolder.component.disposeListeners()
+    }
+    
+}
+
+class AddFactsComponentHolder {
+    let component = CreateFactFeatureComponent()
+    
+    deinit {
+        component.disposeFeature()
+    }
 }

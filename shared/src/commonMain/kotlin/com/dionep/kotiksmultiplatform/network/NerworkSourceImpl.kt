@@ -2,7 +2,6 @@ package com.dionep.kotiksmultiplatform.network
 
 import com.badoo.reaktive.coroutinesinterop.singleFromCoroutine
 import com.badoo.reaktive.single.Single
-import com.dionep.kotiksmultiplatform.Constants
 import com.dionep.kotiksmultiplatform.shared.model.Fact
 import com.dionep.kotiksmultiplatform.shared.model.request.CreateFactRequest
 import io.ktor.client.*
@@ -51,7 +50,7 @@ class NetworkSourceImpl : NetworkSource {
         }
 
         abstract class EndPoint(private val endpoint: String) {
-            fun get() = Constants.Api.BASE_URL + endpoint
+            fun get() = localHostUrl() + endpoint
         }
     }
 

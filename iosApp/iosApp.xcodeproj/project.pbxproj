@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2678B66425C7FE9800F7E2EA /* FactsStateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */; };
+		267D361D25CE979100DB31BF /* AddFactProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D361C25CE979100DB31BF /* AddFactProxy.swift */; };
 		26DBAD9425CD2BDA00118ACC /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9325CD2BDA00118ACC /* ViewRouter.swift */; };
 		26DBAD9825CD2C2700118ACC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9725CD2C2700118ACC /* RootView.swift */; };
 		26DBAD9C25CD2C7700118ACC /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9B25CD2C7700118ACC /* Screens.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsStateProxy.swift; sourceTree = "<group>"; };
+		267D361C25CE979100DB31BF /* AddFactProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFactProxy.swift; sourceTree = "<group>"; };
 		26DBAD9325CD2BDA00118ACC /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		26DBAD9725CD2C2700118ACC /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		26DBAD9B25CD2C7700118ACC /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				26DBADC125CD37D700118ACC /* AddFactView.swift */,
 				26DBADCD25CD46AF00118ACC /* AddFactController.swift */,
+				267D361C25CE979100DB31BF /* AddFactProxy.swift */,
 			);
 			path = add;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				26DBAD9425CD2BDA00118ACC /* ViewRouter.swift in Sources */,
 				26DBAD9825CD2C2700118ACC /* RootView.swift in Sources */,
 				26DBADB525CD369300118ACC /* FactsController.swift in Sources */,
+				267D361D25CE979100DB31BF /* AddFactProxy.swift in Sources */,
 				26DBADCE25CD46AF00118ACC /* AddFactController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

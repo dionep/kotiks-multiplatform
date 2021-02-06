@@ -1,5 +1,6 @@
 package com.dionep.kotiksmultiplatform.features
 
+import com.badoo.reaktive.utils.ensureNeverFrozen
 import com.badoo.reaktive.observable.onErrorReturn
 import com.badoo.reaktive.scheduler.ioScheduler
 import com.badoo.reaktive.scheduler.mainScheduler
@@ -27,6 +28,10 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
             when (msg) {
                 is Msg.Create -> Update(state.copy(isLoading = true), Cmd.Create(msg.text))
                 is Msg.StopLoading -> Update(state.copy(isLoading = false))
+                is Msg.CreaseSuccess -> {
+                    changes.onFactAdded()
+                    Update()
+                }
             }
         },
         commandHandler = { cmd ->
@@ -34,13 +39,15 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
                 is Cmd.Create ->
                     factsRepository.createFact(cmd.text)
                         .map {
-                            changes.onFactAdded()
                             SideEffect<Msg, News>(Msg.StopLoading, News.CreateSuccess)
                         }
                         .subscribeOn(ioScheduler)
                         .observeOn(mainScheduler)
                         .asObservable()
-                        .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure("Error")) }
+                        .onErrorReturn {
+                            println("Occured error: $it")
+                            SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Errrrror"))
+                        }
             }
         },
         newsListener = { newsListener.invoke(it) },
@@ -54,6 +61,7 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
     sealed class Msg {
         data class Create(val text: String) : Msg()
         object StopLoading : Msg()
+        object CreaseSuccess : Msg()
     }
 
     sealed class Cmd {
