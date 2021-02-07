@@ -10,10 +10,12 @@ import Foundation
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct CreateFactController: View {
     
     @State private var componentHolder: AddFactsComponentHolder = AddFactsComponentHolder()
     @State private var stateProxy: CreateFactStateProxy = CreateFactStateProxy()
+    @State private var showError: Bool = false
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
@@ -24,6 +26,9 @@ struct CreateFactController: View {
             .environmentObject(viewRouter)
             .onAppear(perform: onAppear)
             .onDisappear(perform: onDisappear)
+            .alert(isPresented: self.$showError, content: {
+                Alert(title: Text("Error occured"))
+            })
     }
     
     private func onAppear() {
@@ -32,7 +37,9 @@ struct CreateFactController: View {
                 self.stateProxy.updateState(newState: featureState!)
             }
         } newsListener: { (news: CreateFactFeatureComponent.News?) in
-            print(news ?? "NullNew")
+            if (news is CreateFactFeatureComponent.NewsFailure) {
+                showError.toggle()
+            }
             switch news {
                 case CreateFactFeatureComponent.NewsCreateSuccess(): viewRouter.navigateTo(screen: .facts)
                 default: do {}

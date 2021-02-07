@@ -10,13 +10,14 @@ import Foundation
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct CreateFactView: View {
     
     var componentHolder: AddFactsComponentHolder
     @ObservedObject var stateProxy: CreateFactStateProxy
     @EnvironmentObject var viewRouter: ViewRouter
     
-    @State private var factText: String = "Fact"
+    @State private var factText: String = ""
     
     var body: some View {
         NavigationView {
@@ -35,7 +36,18 @@ struct CreateFactView: View {
     
     private var content: some View {
         VStack {
-            TextField("Enter your fact", text: $factText)
+            let state = stateProxy.state
+            if (state == nil || state!.isLoading) {
+                ProgressView()
+            } else {
+                Text("Creating your new fact")
+                Divider()
+                TextEditor(text: $factText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 1))
+                    .padding()
+            }
         }
     }
     
