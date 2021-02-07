@@ -16,3 +16,5 @@ local.properties
 /buildSrc/
 /shared/build/
 /androidApp/build/
+iosApp/iosApp.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+iosApp/iosApp.xcodeproj/project.xcworkspace/xcuserdata/damir.xcuserdatad/WorkspaceSettings.xcsettings
