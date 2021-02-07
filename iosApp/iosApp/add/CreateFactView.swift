@@ -28,7 +28,7 @@ struct CreateFactView: View {
                     },
                     trailing: Button("Save") {
                         componentHolder.component.accept(msg: CreateFactFeatureComponent.MsgCreate(text: factText))
-                    }
+                    }.disabled(factText.isEmpty)
                 )
         }
         
