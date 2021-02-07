@@ -13,7 +13,7 @@ import shared
 struct CreateFactController: View {
     
     @State private var componentHolder: AddFactsComponentHolder = AddFactsComponentHolder()
-    @State private var stateProxy: CreateFactProxy = CreateFactProxy()
+    @State private var stateProxy: CreateFactStateProxy = CreateFactStateProxy()
     @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {

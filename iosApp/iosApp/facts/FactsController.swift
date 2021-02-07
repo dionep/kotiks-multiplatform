@@ -1,26 +1,33 @@
 //
-//  Cats.swift
+//  Facts.swift
 //  iosApp
 //
-//  Created by Дамир on 29.01.2021.
+//  Created by Дамир on 05.02.2021.
 //  Copyright © 2021 orgName. All rights reserved.
 //
 
 import SwiftUI
 import shared
 
-struct Cats: View {
+struct FactsController: View {
     
-    @State private var componentHolder: ComponentHolder = ComponentHolder()
+    @State private var componentHolder: FactsComponentHolder = FactsComponentHolder()
     @State private var stateProxy: FactsStateProxy = FactsStateProxy()
+    @State var showError: Bool = false
+    @EnvironmentObject var viewRouter: ViewRouter
     
     var body: some View {
-        CatsSwiftView(
+        
+        FactsView(
             componentHolder: componentHolder,
             stateProxy: stateProxy
         )
+            .environmentObject(viewRouter)
             .onAppear(perform: onAppear)
             .onDisappear(perform: onDisappear)
+            .alert(isPresented: self.$showError, content: {
+                Alert(title: Text("Error occured"))
+            })
     }
     
     private func onAppear() {
@@ -29,7 +36,9 @@ struct Cats: View {
                 self.stateProxy.updateState(newState: featureState!)
             }
         } newsListener: { (news: FactsFeatureComponent.News?) in
-            
+            if (news is FactsFeatureComponent.NewsFailure) {
+                showError.toggle()
+            }
         }
 
     }
@@ -40,7 +49,7 @@ struct Cats: View {
 
 }
 
-class ComponentHolder {
+class FactsComponentHolder {
     let component = FactsFeatureComponent()
     
     deinit {
@@ -50,6 +59,7 @@ class ComponentHolder {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        Cats()
+        FactsController().environmentObject(ViewRouter())
     }
 }
+

@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2678B66425C7FE9800F7E2EA /* FactsStateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */; };
-		267D361D25CE979100DB31BF /* CreateFactProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D361C25CE979100DB31BF /* CreateFactProxy.swift */; };
+		267D361D25CE979100DB31BF /* CreateFactStateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267D361C25CE979100DB31BF /* CreateFactStateProxy.swift */; };
+		26B73F6C25CFC59200C14DA9 /* FactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B73F6A25CFC59200C14DA9 /* FactsController.swift */; };
+		26B73F6D25CFC59200C14DA9 /* FactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B73F6B25CFC59200C14DA9 /* FactsView.swift */; };
+		26B73F7125CFC62C00C14DA9 /* FactsStateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B73F7025CFC62C00C14DA9 /* FactsStateProxy.swift */; };
 		26DBAD9425CD2BDA00118ACC /* ViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9325CD2BDA00118ACC /* ViewRouter.swift */; };
 		26DBAD9825CD2C2700118ACC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9725CD2C2700118ACC /* RootView.swift */; };
 		26DBAD9C25CD2C7700118ACC /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBAD9B25CD2C7700118ACC /* Screens.swift */; };
-		26DBADB525CD369300118ACC /* FactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBADB325CD369300118ACC /* FactsController.swift */; };
-		26DBADB625CD369300118ACC /* FactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBADB425CD369300118ACC /* FactsView.swift */; };
 		26DBADC225CD37D700118ACC /* CreateFactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBADC125CD37D700118ACC /* CreateFactView.swift */; };
 		26DBADCE25CD46AF00118ACC /* CreateFactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DBADCD25CD46AF00118ACC /* CreateFactController.swift */; };
 		7555FF7F242A565900829871 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF7E242A565900829871 /* AppDelegate.swift */; };
@@ -60,12 +61,13 @@
 
 /* Begin PBXFileReference section */
 		2678B66325C7FE9800F7E2EA /* FactsStateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactsStateProxy.swift; sourceTree = "<group>"; };
-		267D361C25CE979100DB31BF /* CreateFactProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFactProxy.swift; sourceTree = "<group>"; };
+		267D361C25CE979100DB31BF /* CreateFactStateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFactStateProxy.swift; sourceTree = "<group>"; };
+		26B73F6A25CFC59200C14DA9 /* FactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactsController.swift; sourceTree = "<group>"; };
+		26B73F6B25CFC59200C14DA9 /* FactsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FactsView.swift; sourceTree = "<group>"; };
+		26B73F7025CFC62C00C14DA9 /* FactsStateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactsStateProxy.swift; path = "iosApp/Preview Content/FactsStateProxy.swift"; sourceTree = SOURCE_ROOT; };
 		26DBAD9325CD2BDA00118ACC /* ViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRouter.swift; sourceTree = "<group>"; };
 		26DBAD9725CD2C2700118ACC /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		26DBAD9B25CD2C7700118ACC /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
-		26DBADB325CD369300118ACC /* FactsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactsController.swift; path = ../../../../../.Trash/FactsController.swift; sourceTree = "<group>"; };
-		26DBADB425CD369300118ACC /* FactsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FactsView.swift; path = ../../../../../.Trash/FactsView.swift; sourceTree = "<group>"; };
 		26DBADC125CD37D700118ACC /* CreateFactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFactView.swift; sourceTree = "<group>"; };
 		26DBADCD25CD46AF00118ACC /* CreateFactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFactController.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,8 +115,9 @@
 		26DBADAE25CD349E00118ACC /* facts */ = {
 			isa = PBXGroup;
 			children = (
-				26DBADB325CD369300118ACC /* FactsController.swift */,
-				26DBADB425CD369300118ACC /* FactsView.swift */,
+				26B73F7025CFC62C00C14DA9 /* FactsStateProxy.swift */,
+				26B73F6A25CFC59200C14DA9 /* FactsController.swift */,
+				26B73F6B25CFC59200C14DA9 /* FactsView.swift */,
 			);
 			path = facts;
 			sourceTree = "<group>";
@@ -124,7 +127,7 @@
 			children = (
 				26DBADC125CD37D700118ACC /* CreateFactView.swift */,
 				26DBADCD25CD46AF00118ACC /* CreateFactController.swift */,
-				267D361C25CE979100DB31BF /* CreateFactProxy.swift */,
+				267D361C25CE979100DB31BF /* CreateFactStateProxy.swift */,
 			);
 			path = add;
 			sourceTree = "<group>";
@@ -356,16 +359,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26DBADB625CD369300118ACC /* FactsView.swift in Sources */,
+				26B73F7125CFC62C00C14DA9 /* FactsStateProxy.swift in Sources */,
 				26DBADC225CD37D700118ACC /* CreateFactView.swift in Sources */,
 				7555FF7F242A565900829871 /* AppDelegate.swift in Sources */,
 				7555FF81242A565900829871 /* SceneDelegate.swift in Sources */,
 				2678B66425C7FE9800F7E2EA /* FactsStateProxy.swift in Sources */,
 				26DBAD9C25CD2C7700118ACC /* Screens.swift in Sources */,
+				26B73F6C25CFC59200C14DA9 /* FactsController.swift in Sources */,
 				26DBAD9425CD2BDA00118ACC /* ViewRouter.swift in Sources */,
 				26DBAD9825CD2C2700118ACC /* RootView.swift in Sources */,
-				26DBADB525CD369300118ACC /* FactsController.swift in Sources */,
-				267D361D25CE979100DB31BF /* CreateFactProxy.swift in Sources */,
+				267D361D25CE979100DB31BF /* CreateFactStateProxy.swift in Sources */,
+				26B73F6D25CFC59200C14DA9 /* FactsView.swift in Sources */,
 				26DBADCE25CD46AF00118ACC /* CreateFactController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,7 +13,7 @@ import shared
 struct CreateFactView: View {
     
     var componentHolder: AddFactsComponentHolder
-    @ObservedObject var stateProxy: CreateFactProxy
+    @ObservedObject var stateProxy: CreateFactStateProxy
     @EnvironmentObject var viewRouter: ViewRouter
     
     @State private var factText: String = "Fact"
