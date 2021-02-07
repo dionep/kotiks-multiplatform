@@ -9,6 +9,7 @@
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct FactsController: View {
     
     @State private var componentHolder: FactsComponentHolder = FactsComponentHolder()
@@ -26,7 +27,11 @@ struct FactsController: View {
             .onAppear(perform: onAppear)
             .onDisappear(perform: onDisappear)
             .alert(isPresented: self.$showError, content: {
-                Alert(title: Text("Error occured"))
+                Alert(
+                    title: Text("Error occured"),
+                    primaryButton: .destructive(Text("Refresh")) { componentHolder.component.accept(msg: FactsFeatureComponent.MsgLoad()) },
+                    secondaryButton: .cancel()
+                )
             })
     }
     
@@ -57,6 +62,7 @@ class FactsComponentHolder {
     }
 }
 
+@available(iOS 14.0, *)
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         FactsController().environmentObject(ViewRouter())

@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import shared
 
+@available(iOS 14.0, *)
 struct FactsView: View {
     
     var componentHolder: FactsComponentHolder
@@ -38,7 +39,7 @@ struct FactsView: View {
                 EmptyView()
             }
             else if (state!.isLoading) {
-                Text("Loading.....")
+                ProgressView()
             }
             else {
                 List {
@@ -52,6 +53,7 @@ struct FactsView: View {
     
 }
 
+@available(iOS 14.0, *)
 struct FactsSwiftView_Previews: PreviewProvider {
     static var previews: some View {
         FactsView(
