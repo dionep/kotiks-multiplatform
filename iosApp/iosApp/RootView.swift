@@ -17,7 +17,6 @@ struct RootView: View {
         switch viewRouter.currentPage {
             case .facts:
                 FactsController().environmentObject(viewRouter)
-                    .transition(.scale)
             case .addFact:
                 CreateFactController().environmentObject(viewRouter)
                     .transition(.scale)

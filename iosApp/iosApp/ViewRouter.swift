@@ -13,8 +13,9 @@ class ViewRouter: ObservableObject {
     @Published var currentPage: Screen = .facts
     
     func navigateTo(screen: Screen) {
-        print(screen)
-        currentPage = screen
+        withAnimation {
+            currentPage = screen
+        }
     }
     
 }
