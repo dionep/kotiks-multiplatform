@@ -28,9 +28,7 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                 is Msg.StopLoading -> Update(state.copy(isLoading = false))
                 is Msg.SetFacts -> Update(state.copy(isLoading = false, facts = msg.facts))
                 is Msg.DeleteFact -> Update(state.copy(isLoading = true), Cmd.DeleteFact(msg.id))
-                is Msg.FactDeleted -> {
-                    Update(cmd = Cmd.Load)
-                }
+                is Msg.FactDeleted -> Update(cmd = Cmd.Load)
             }
         },
         commandHandler = { cmd ->

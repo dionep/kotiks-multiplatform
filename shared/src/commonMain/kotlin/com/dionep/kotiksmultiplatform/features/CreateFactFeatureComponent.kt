@@ -45,7 +45,6 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
                         .observeOn(mainScheduler)
                         .asObservable()
                         .onErrorReturn {
-                            println("Occured error: $it")
                             SideEffect(Msg.StopLoading, News.Failure(it.message ?: "Errrrror"))
                         }
             }

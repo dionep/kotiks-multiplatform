@@ -45,7 +45,6 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
         setOnClickListeners()
-        println("onViewCreated")
     }
 
     private fun setOnClickListeners() {
@@ -68,10 +67,7 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
 
     override fun handleNews(news: News) {
         when (news) {
-            is News.Failure -> {
-                println(news.throwable)
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-            }
+            is News.Failure -> Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
         }
     }
 
