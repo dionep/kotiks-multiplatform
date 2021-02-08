@@ -44,6 +44,13 @@ class NetworkSourceImpl : NetworkSource {
             }
         }
 
+    override fun deleteFact(id: Int): Single<Boolean> =
+        singleFromCoroutine {
+            httpClient.delete(EndPoints.Facts.get() + "/$id") {
+                contentType(ContentType.Application.Json)
+            }
+        }
+
     companion object {
         object EndPoints {
             object Facts : EndPoint("facts")

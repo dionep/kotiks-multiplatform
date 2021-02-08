@@ -29,7 +29,7 @@ class CreateFactFeatureComponent : MviComponent<State, Msg, News>(), KoinCompone
                 is Msg.Create -> Update(state.copy(isLoading = true), Cmd.Create(msg.text))
                 is Msg.StopLoading -> Update(state.copy(isLoading = false))
                 is Msg.CreaseSuccess -> {
-                    changes.onFactAdded()
+                    changes.onFactsChanged()
                     Update()
                 }
             }

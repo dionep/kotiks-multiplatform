@@ -14,7 +14,7 @@ internal class Changes {
         get() = factAddedSubject
             .observeOn(mainScheduler)
 
-    fun onFactAdded() {
+    fun onFactsChanged() {
         factAddedSubject.onNext(Any())
     }
 

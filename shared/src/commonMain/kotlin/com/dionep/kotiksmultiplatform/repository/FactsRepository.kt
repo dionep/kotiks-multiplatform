@@ -19,5 +19,7 @@ class FactsRepository(
     fun createFact(text: String): Single<Boolean> =
         networkSource.createFact(text)
 
+    fun deleteFact(id: Int): Single<Boolean> =
+        networkSource.deleteFact(id)
 
 }

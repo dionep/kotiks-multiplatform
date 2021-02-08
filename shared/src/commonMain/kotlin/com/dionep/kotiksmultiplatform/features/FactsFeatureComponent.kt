@@ -25,6 +25,11 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                 is Msg.Load -> Update(state.copy(isLoading = true), Cmd.Load)
                 is Msg.StopLoading -> Update(state.copy(isLoading = false))
                 is Msg.SetFacts -> Update(state.copy(isLoading = false, facts = msg.facts))
+                is Msg.DeleteFact -> Update(state.copy(isLoading = true), Cmd.DeleteFact(msg.id))
+                is Msg.FactDeleted -> {
+                    changes.onFactsChanged()
+                    Update(state.copy(isLoading = false))
+                }
             }
         },
         commandHandler = { cmd ->
@@ -32,6 +37,13 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                 is Cmd.Load ->
                     factsRepository.getFacts()
                         .map { SideEffect<Msg, News>(Msg.SetFacts(it)) }
+                        .subscribeOn(ioScheduler)
+                        .observeOn(mainScheduler)
+                        .asObservable()
+                        .onErrorReturn { SideEffect(Msg.StopLoading, News.Failure(it)) }
+                is Cmd.DeleteFact ->
+                    factsRepository.deleteFact(cmd.id)
+                        .map { SideEffect<Msg, News>(Msg.FactDeleted) }
                         .subscribeOn(ioScheduler)
                         .observeOn(mainScheduler)
                         .asObservable()
@@ -53,12 +65,15 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
     sealed class Cmd {
         object Load : Cmd()
+        data class DeleteFact(val id: Int)
     }
 
     sealed class Msg {
         object Load : Msg()
         object StopLoading : Msg()
         data class SetFacts(val facts: List<String>) : Msg()
+        data class DeleteFact(val id: Int) : Msg()
+        object FactDeleted : Msg()
     }
 
     sealed class News {
