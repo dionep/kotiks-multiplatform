@@ -13,6 +13,7 @@ import com.dionep.kotiksmultiplatform.androidApp.databinding.FragmentMainBinding
 import com.dionep.kotiksmultiplatform.androidApp.delegates.fact
 import com.dionep.kotiksmultiplatform.androidApp.ui.add.AddFactFragment
 import com.dionep.kotiksmultiplatform.androidApp.utils.viewBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rerekt.rekukler.MultiBindingAdapter
 import com.rerekt.rekukler.configure
 
@@ -27,10 +28,17 @@ class FactsFragment : MviFragment<State, Msg, News>(R.layout.fragment_main) {
 
     private val factsAdapter by lazy {
         MultiBindingAdapter(
-            fact {
-                println("Fact clicked")
-            }
+            fact { onDeleteFact(it) }
         )
+    }
+
+    private fun onDeleteFact(id: Int) {
+        with (MaterialAlertDialogBuilder(requireContext())) {
+            setTitle("Deleting")
+            setMessage("Delete fact?")
+            setPositiveButton(android.R.string.ok) { _, _ -> component.accept(Msg.DeleteFact(id))}
+            setNegativeButton(android.R.string.cancel) { _, _ -> }
+        }.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

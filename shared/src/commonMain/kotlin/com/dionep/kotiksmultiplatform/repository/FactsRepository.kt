@@ -1,20 +1,15 @@
 package com.dionep.kotiksmultiplatform.repository
 
-import com.badoo.reaktive.observable.map
-import com.badoo.reaktive.observable.toList
 import com.badoo.reaktive.single.Single
-import com.badoo.reaktive.single.flatMapIterable
 import com.dionep.kotiksmultiplatform.network.NetworkSource
+import com.dionep.kotiksmultiplatform.shared.model.Fact
 
 class FactsRepository(
     private val networkSource: NetworkSource
 ) {
 
-    fun getFacts(): Single<List<String>> =
+    fun getFacts(): Single<List<Fact>> =
         networkSource.getFacts()
-            .flatMapIterable { it }
-            .map { it.text }
-            .toList()
 
     fun createFact(text: String): Single<Boolean> =
         networkSource.createFact(text)

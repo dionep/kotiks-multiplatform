@@ -9,6 +9,7 @@ import com.dionep.kotiksmultiplatform.features.FactsFeatureComponent.*
 import com.dionep.kotiksmultiplatform.base.MviComponent
 import com.dionep.kotiksmultiplatform.features.changes.Changes
 import com.dionep.kotiksmultiplatform.repository.FactsRepository
+import com.dionep.kotiksmultiplatform.shared.model.Fact
 import com.dionep.kotiksmultiplatform.shared.mvi.*
 import org.koin.core.*
 
@@ -60,18 +61,18 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
     data class State(
         val isLoading: Boolean = false,
-        val facts: List<String> = listOf()
+        val facts: List<Fact> = listOf()
     )
 
     sealed class Cmd {
         object Load : Cmd()
-        data class DeleteFact(val id: Int)
+        data class DeleteFact(val id: Int) : Cmd()
     }
 
     sealed class Msg {
         object Load : Msg()
         object StopLoading : Msg()
-        data class SetFacts(val facts: List<String>) : Msg()
+        data class SetFacts(val facts: List<Fact>) : Msg()
         data class DeleteFact(val id: Int) : Msg()
         object FactDeleted : Msg()
     }
