@@ -25,6 +25,13 @@ fun Route.facts() {
             } ?: call.respond(HttpStatusCode.BadRequest)
         }
 
+        delete("/{id}") {
+            call.parameters["id"]?.toIntOrNull()?.let {
+                repo.deleteFact(it)
+                call.respond(true)
+            } ?: call.respond(HttpStatusCode.BadRequest)
+        }
+
     }
 
 }

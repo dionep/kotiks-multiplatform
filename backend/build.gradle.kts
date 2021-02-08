@@ -18,6 +18,7 @@ dependencies {
     implementation(Dependencies.Backend.Database.Zaxxer.HikariCP)
     implementation(Dependencies.Logback.Classic)
     implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Json)
+    implementation(Dependencies.Jetbrains.Kotlinx.Serialization.Core)
     implementation(Dependencies.Ktor.Json)
 }
 

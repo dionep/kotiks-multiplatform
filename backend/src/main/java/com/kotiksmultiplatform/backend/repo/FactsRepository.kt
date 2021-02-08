@@ -4,6 +4,7 @@ import com.kotiksmultiplatform.backend.dbQuery
 import com.kotiksmultiplatform.backend.entities.Fact
 import com.kotiksmultiplatform.backend.tables.Facts
 import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
@@ -16,6 +17,12 @@ class FactsRepository {
     suspend fun createFact(factText: String) = dbQuery {
         Facts.insert {
             it[text] = factText
+        }
+    }
+
+    suspend fun deleteFact(factId: Int) = dbQuery {
+        Facts.deleteWhere {
+            Facts.id eq factId
         }
     }
 
