@@ -2,20 +2,22 @@ package com.dionep.kotiksmultiplatform.features.changes
 
 import com.badoo.reaktive.observable.Observable
 import com.badoo.reaktive.observable.observeOn
+import com.badoo.reaktive.observable.threadLocal
 import com.badoo.reaktive.scheduler.mainScheduler
 import com.badoo.reaktive.subject.publish.PublishSubject
 import com.badoo.reaktive.utils.ensureNeverFrozen
 
 internal class Changes {
 
-    private val factAddedSubject = PublishSubject<Any>().ensureNeverFrozen()
+    private val factsChangedSubject = PublishSubject<Any>().ensureNeverFrozen()
 
-    val factAddedObservable: Observable<Any>
-        get() = factAddedSubject
+    val factChangedObservable: Observable<Any>
+        get() = factsChangedSubject
+            .threadLocal()
             .observeOn(mainScheduler)
 
     fun onFactsChanged() {
-        factAddedSubject.onNext(Any())
+        factsChangedSubject.onNext(Any())
     }
 
 }

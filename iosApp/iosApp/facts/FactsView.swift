@@ -44,10 +44,17 @@ struct FactsView: View {
             else {
                 List {
                     ForEach(state?.facts ?? [], id: \.self) { item in
-                        Text(item)
-                    }
+                        Text(item.text)
+                    }.onDelete(perform: deleteFact)
                 }.listStyle(GroupedListStyle())
             }
+        }
+    }
+    
+    func deleteFact(from source: IndexSet) {
+        let facts = self.stateProxy.state?.facts ?? []
+        source.forEach { index in
+            componentHolder.component.accept(msg: FactsFeatureComponent.MsgDeleteFact(id: facts[index].id))
         }
     }
     

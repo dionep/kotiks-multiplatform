@@ -12,6 +12,7 @@ import com.dionep.kotiksmultiplatform.repository.FactsRepository
 import com.dionep.kotiksmultiplatform.shared.model.Fact
 import com.dionep.kotiksmultiplatform.shared.mvi.*
 import org.koin.core.*
+import com.badoo.reaktive.observable.observeOn
 
 class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
 
@@ -28,8 +29,7 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
                 is Msg.SetFacts -> Update(state.copy(isLoading = false, facts = msg.facts))
                 is Msg.DeleteFact -> Update(state.copy(isLoading = true), Cmd.DeleteFact(msg.id))
                 is Msg.FactDeleted -> {
-                    changes.onFactsChanged()
-                    Update(state.copy(isLoading = false))
+                    Update(cmd = Cmd.Load)
                 }
             }
         },
@@ -52,7 +52,7 @@ class FactsFeatureComponent : MviComponent<State, Msg, News>(), KoinComponent {
             }
         },
         bootstrapper = setOf(
-            changes.factAddedObservable
+            changes.factChangedObservable
                 .map { Msg.Load }
         ),
         stateListener = { stateListener.invoke(it) },
